@@ -1,0 +1,3 @@
+@mixin animacion($nombre, $duracion, $ritmo, $retardo, $tiempo) {
+  animation: $nombre $duracion $ritmo $retardo $tiempo;
+}
