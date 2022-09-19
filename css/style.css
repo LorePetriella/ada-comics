@@ -45,7 +45,7 @@
   backface-visibility: hidden;
   scale: 1, 1;
   transform: translateZ(0);
-  background: #1B2030 url("/assets/img/mearvel-legacy-header.jpg") 50% -50% no-repeat;
+  background: #1b2030 url("/assets/img/mearvel-legacy-header.jpg") 50% -50% no-repeat;
   filter: grayscale(100%);
   background-size: cover;
   background-attachment: fixed;
@@ -73,6 +73,26 @@
   border-top: 5px solid white;
   border-bottom: 5px solid white;
   margin-left: 20px;
+}
+
+.btn-margen {
+  margin-left: 20px;
+}
+
+.margen-derecho {
+  margin-right: 10px;
+}
+
+.estilo-focus {
+  width: auto;
+}
+.estilo-focus:focus {
+  border-color: rgb(141, 140, 140);
+  box-shadow: 0 0 0 0.2rem rgba(16, 15, 15, 0.25);
+}
+
+.margen-inferior-nav {
+  margin-bottom: 3rem;
 }
 
 .body {
