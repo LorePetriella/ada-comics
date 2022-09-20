@@ -170,6 +170,10 @@
   margin-bottom: 3rem;
 }
 
+.resultados-info {
+  margin-bottom: 1rem;
+}
+
 .body {
   display: flex;
   min-height: 100vh;
