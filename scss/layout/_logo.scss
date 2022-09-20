@@ -49,7 +49,7 @@ body {
   letter-spacing: -0.08rem;
   transition: opacity 150ms linear;
 }
-.ada {
+.name {
   position: relative;
   color: #fff;
   text-transform: uppercase;
@@ -74,7 +74,7 @@ body {
     left: 0;
   }
 }
-.comics {
+.surname {
   position: relative;
   color: #fff;
   text-transform: uppercase;
@@ -111,11 +111,11 @@ body {
 }
 .wrapper.run-animation {
   animation: shrink ease-out 4800ms forwards 600ms;
-  .ada {
+  .name {
     transform: translateX(95px);
     animation: slide-out-X 750ms ease forwards;
   }
-  .comics {
+  .surname {
     transform: translateX(-95px);
     color: transparent;
     animation: slide-out-X 750ms ease forwards,

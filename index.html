@@ -27,15 +27,42 @@
     <title>ADAComics</title>
   </head>
   <body class="body">
-    <div class="wrapper run-animation" id="animate">
-      <div class="logo">
-        <span class="ada">ada</span>
-        <span class="comics">comics</span>
-      </div>
-    </div>
+    <div id="presentation-container">
+      <div class="wrapper run-animation" id="animate">
+        <div class="row">
+          <div id="logo" class="logo">
+            <span class="name">ada</span>
+            <span class="surname">comics</span>
+          </div>
 
-    <div class="images"></div>
-    <header></header>
+          <button
+            id="enter-btn"
+            type="button"
+            class="btn btn-outline-light fw-semibold"
+          >
+            Entrar
+          </button>
+        </div>
+      </div>
+
+      <div class="images"></div>
+    </div>
+    <!-- ******************************************
+                     HEADER - BANNER
+    ********************************************* -->
+    <header class="header">
+      <div class="banner">
+        <div class="titulo">
+          <h1>
+            <span class="ada">ADA</span><span class="comics">COMICS</span>
+          </h1>
+        </div>
+      </div>
+    </header>
+
+    <!-- ******************************************
+                  SECCIÓN PRINCIPAL
+    ********************************************* -->
     <main class="main">
       <!-- ******************************************
                   MENÚ DE NAVEGACIÓN
@@ -95,7 +122,7 @@
     <!-- ******************************************
                        FOOTER
     ********************************************* -->
-    <footer class="page-footer footer-bg">
+    <footer id="footer" class="page-footer footer-bg">
       <div class="row">
         <div class="footer-copyright copyright">
           <div class="container">

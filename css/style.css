@@ -217,7 +217,7 @@ body {
   transition: opacity 150ms linear;
 }
 
-.ada {
+.name {
   position: relative;
   color: #fff;
   text-transform: uppercase;
@@ -230,7 +230,7 @@ body {
   font-weight: 800;
   transform: translateX(95px);
 }
-.ada:before {
+.name:before {
   z-index: -10;
   content: "";
   display: block;
@@ -243,7 +243,7 @@ body {
   left: 0;
 }
 
-.comics {
+.surname {
   position: relative;
   color: #fff;
   text-transform: uppercase;
@@ -256,7 +256,7 @@ body {
   letter-spacing: -0.3rem;
   transform: translateX(-95px);
 }
-.comics:after {
+.surname:after {
   content: "";
   display: block;
   height: 3px;
@@ -267,7 +267,7 @@ body {
   right: 0.4rem;
   bottom: 0;
 }
-.comics:before {
+.surname:before {
   content: "";
   display: block;
   height: 3px;
@@ -282,20 +282,20 @@ body {
 .wrapper.run-animation {
   animation: shrink ease-out 4800ms forwards 600ms;
 }
-.wrapper.run-animation .ada {
+.wrapper.run-animation .name {
   transform: translateX(95px);
   animation: slide-out-X 750ms ease forwards;
 }
-.wrapper.run-animation .comics {
+.wrapper.run-animation .surname {
   transform: translateX(-95px);
   color: transparent;
   animation: slide-out-X 750ms ease forwards, show-text 300ms linear forwards 1500ms;
 }
-.wrapper.run-animation .comics:before {
+.wrapper.run-animation .surname:before {
   transform: translateY(2.9rem);
   animation: slide-out-Y 300ms ease forwards 750ms;
 }
-.wrapper.run-animation .comics:after {
+.wrapper.run-animation .surname:after {
   transform: translateY(-2.9rem);
   animation: slide-out-Y 300ms ease forwards 750ms;
 }
