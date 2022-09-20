@@ -26,7 +26,27 @@
     <link rel="stylesheet" href="/css/style.css" />
     <title>ADAComics</title>
   </head>
-  <body class="body">
+  <body id="body">
+    <div id="presentation-container">
+      <div class="wrapper run-animation" id="animate">
+        <div class="row">
+          <div id="logo" class="logo">
+            <span class="name">ada</span>
+            <span class="surname">comics</span>
+          </div>
+
+          <button
+            id="enter-btn"
+            type="button"
+            class="btn btn-outline-light fw-semibold"
+          >
+            Entrar
+          </button>
+        </div>
+      </div>
+
+      <div class="images"></div>
+    </div>
     <!-- ******************************************
                      HEADER - BANNER
     ********************************************* -->
@@ -38,13 +58,6 @@
           </h1>
         </div>
       </div>
-      <!-- <div class="wrapper run-animation" id="animate">
-        <div class="logo">
-          <span class="ada">ada</span>
-          <span class="comics">comics</span>
-        </div>
-      </div>
-      <div class="images"></div> -->
     </header>
 
     <!-- ******************************************
@@ -52,7 +65,7 @@
     ********************************************* -->
     <main class="main">
       <div class="container d-flex flex-column justify-content-center">
-      <!-- ******************************************
+        <!-- ******************************************
                   MENÚ DE NAVEGACIÓN
       ********************************************* -->
         <nav class="margen-inferior-nav">
@@ -80,12 +93,10 @@
             </div>
             <div class="col-12 col-sm-6">
               <div class="d-flex flex-row justify-content-start">
-                <div
-                  class="col-6 col-sm-5 d-flex flex-row align-items-center"
-                >
+                <div class="col-6 col-sm-5 d-flex flex-row align-items-center">
                   <label
                     for="select-tipo"
-                    class=" fw-bold text-secondary margen-derecho"
+                    class="fw-bold text-secondary margen-derecho"
                     >TIPO</label
                   >
                   <select
@@ -124,6 +135,8 @@
           </div>
         </nav>
 
+
+
     <!-- ******************************************
                   SECCIÓN RESULTADOS
     ********************************************* -->
@@ -135,63 +148,61 @@
           </div>
         </div>
 
-      <div class="container-fluid">
-        <!-- <div class="progress">
+   
         <div class="indeterminate"></div>
       </div> -->
-        <div id="contenedor" class="contenedor">
-          <span class="loader"></span>
+          <div id="contenedor" class="contenedor">
+            <span class="loader"></span>
+          </div>
+          <div id="root" class="row"></div>
         </div>
-        <div id="root" class="row"></div>
-      </div>
 
-      <div class="container-paginador">
-        <p>Pagina Actual: <span id="pagina-actual"></span></p>
-        <p>Total de paginas: <span id="total-paginas"></span></p>
-      </div>
+        <div class="container-paginador">
+          <p>Pagina Actual: <span id="pagina-actual"></span></p>
+          <p>Total de paginas: <span id="total-paginas"></span></p>
+        </div>
 
-      <div class="pagination">
-        <button
-          type="button"
-          id="first-page"
-          class="first-page pagination-button"
-          aria-label="Página previa"
-        >
-          <i class="fas fa-angle-double-left" aria-hidden="true"></i>
-        </button>
-        <button
-          type="button"
-          id="previus-page"
-          class="previous-page pagination-button"
-          aria-label="Página Anterior"
-        >
-          <i class="fas fa-angle-left" aria-hidden="true"></i>
-        </button>
-        <button
-          type="button"
-          id="next-page"
-          class="next-page pagination-button"
-          aria-label="Siguiente Página"
-        >
-          <i class="fas fa-angle-right" aria-hidden="true"></i>
-        </button>
-        <button
-          type="button"
-          id="last-page"
-          class="last-page pagination-button"
-          aria-label="Última página"
-        >
-          <i class="fas fa-angle-double-right" aria-hidden="true"></i>
-        </button>
-      </div>
-
+        <div class="pagination">
+          <button
+            type="button"
+            id="first-page"
+            class="first-page pagination-button"
+            aria-label="Página previa"
+          >
+            <i class="fas fa-angle-double-left" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            id="previus-page"
+            class="previous-page pagination-button"
+            aria-label="Página Anterior"
+          >
+            <i class="fas fa-angle-left" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            id="next-page"
+            class="next-page pagination-button"
+            aria-label="Siguiente Página"
+          >
+            <i class="fas fa-angle-right" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            id="last-page"
+            class="last-page pagination-button"
+            aria-label="Última página"
+          >
+            <i class="fas fa-angle-double-right" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
     </main>
 
     <!-- ******************************************
                        FOOTER
     ********************************************* -->
-    <footer class="page-footer footer-bg">
+    <footer id="footer" class="page-footer footer-bg">
       <div class="row">
         <div class="footer-copyright copyright">
           <div class="container">
