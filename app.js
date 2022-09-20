@@ -17,6 +17,7 @@ const element = document.getElementById("animate");
 const header = document.querySelector(".header");
 const main = document.querySelector("main");
 const footer = document.getElementById("footer");
+const body = document.getElementById("body");
 
 if (element) {
   // reset the transition by...
@@ -52,4 +53,6 @@ inicio.addEventListener("click", () => {
   header.classList.remove("d-none");
   main.classList.remove("d-none");
   footer.classList.remove("d-none");
+  body.style.background = "white";
+  body.style.backgroundImage = "white";
 });
