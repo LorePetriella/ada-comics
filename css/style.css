@@ -181,6 +181,17 @@
 #section-comics .info-comic {
   margin-left: 4%;
 }
+@media (max-width: 900px) {
+  #section-comics .info-comic {
+    margin-left: 0%;
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 900px) {
+  #section-comics {
+    flex-direction: column;
+  }
+}
 
 .resultados-info {
   margin-bottom: 1rem;
