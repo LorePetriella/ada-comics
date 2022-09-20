@@ -167,7 +167,19 @@
 }
 
 .margen-inferior-nav {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
+}
+
+#section-comics {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3.5rem;
+}
+#section-comics .comic-portada {
+  max-width: 22rem;
+}
+#section-comics .info-comic {
+  margin-left: 4%;
 }
 
 .resultados-info {
