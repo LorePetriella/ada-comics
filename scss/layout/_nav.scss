@@ -1,7 +1,3 @@
-.btn-margen{
-    margin-left: 20px;
-}
-
 .margen-derecho{
     margin-right: 10px;
 }
@@ -16,4 +12,12 @@
 
 .margen-inferior-nav{
     margin-bottom: 4rem;
+}
+
+.box-btn-buscar{
+    margin-left: 5px;
+    @include responsive(medium){
+        width: 100%;
+        margin-left: 0;
+    }
 }
