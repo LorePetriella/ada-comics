@@ -56,3 +56,130 @@ inicio.addEventListener("click", () => {
   body.style.background = "white";
   body.style.backgroundImage = "white";
 });
+
+// Vistas secciones
+
+const comicSection = document.getElementById("comic-section");
+
+const characterSection = document.getElementById("character-section");
+const selectComics = document.getElementById("select-tipo");
+const selectCharacters = document.getElementById("select-type");
+
+selectComics.addEventListener("click", (e) => {
+  if (e.target.value === "COMICS") {
+    comicSection.classList.remove("d-none");
+    characterSection.classList.add("d-none");
+  } else if (e.target.value === "PERSONAJES") {
+    characterSection.classList.remove("d-none");
+    comicSection.classList.add("d-none");
+  }
+});
+selectCharacters.addEventListener("change", (e) => {
+  if (e.target.value === "COMICS") {
+    comicSection.classList.remove("d-none");
+    characterSection.classList.add("d-none");
+  } else if (e.target.value === "PERSONAJES") {
+    characterSection.classList.remove("d-none");
+    comicSection.classList.add("d-none");
+  }
+});
+
+// Paginator
+
+// const paginaActual = document.getElementById("pagina-actual");
+// const totalPaginas = document.getElementById("total-paginas");
+// const nextPage = document.getElementById("next-page");
+// const firstPage = document.getElementById("first-page");
+// const previusPage = document.getElementById("previus-page");
+// const lastPage = document.getElementById("last-page");
+
+// let pagina = 1;
+// let total = 0;
+
+// const pagination = async (promesa) => {
+//   const result = await promesa;
+//   nextPage.addEventListener("click", () => {
+//     pagina += 1;
+//     getData();
+//   });
+//   previusPage.addEventListener("click", () => {
+//     pagina -= 1;
+//     getData();
+//   });
+//   lastPage.addEventListener("click", () => {
+//     if (pagina < result.info.pages) {
+//       pagina = result.info.pages;
+//       getData();
+//     }
+//   });
+//   firstPage.addEventListener("click", () => {
+//     if (pagina > 2) {
+//       pagina = 1;
+//       getData();
+//     }
+//   });
+// };
+
+// const updatePagination = () => {
+//   if (pagina <= 1) {
+//     previusPage.disabled = true;
+//     firstPage.disabled = true;
+//   } else {
+//     previusPage.disabled = false;
+//     firstPage.disabled = false;
+//   }
+//   if (pagina === total) {
+//     nextPage.disabled = true;
+//     lastPage.disabled = true;
+//   } else {
+//     nextPage.disabled = false;
+//     lastPage.disabled = false;
+//   }
+// };
+
+// const pagination = async (promesa) => {
+//   const result = await promesa;
+//   nextPage.addEventListener("click", () => {
+//     pagina += 1;
+//     getData();
+//   });
+//   previusPage.addEventListener("click", () => {
+//     pagina -= 1;
+//     getData();
+//   });
+//   lastPage.addEventListener("click", () => {
+//     if (pagina < result.info.pages) {
+//       pagina = result.info.pages;
+//       getData();
+//     }
+//   });
+//   firstPage.addEventListener("click", () => {
+//     if (pagina > 2) {
+//       pagina = 1;
+//       getData();
+//     }
+//   });
+// };
+
+// const updatePagination = () => {
+//   if (pagina <= 1) {
+//     previusPage.disabled = true;
+//     firstPage.disabled = true;
+//   } else {
+//     previusPage.disabled = false;
+//     firstPage.disabled = false;
+//   }
+//   if (pagina === total) {
+//     nextPage.disabled = true;
+//     lastPage.disabled = true;
+//   } else {
+//     nextPage.disabled = false;
+//     lastPage.disabled = false;
+//   }
+// };
+
+// $(document).ready(function () {
+//   $(".dropdown-trigger").dropdown();
+//   pagination(getData());
+//   updatePagination();
+// });

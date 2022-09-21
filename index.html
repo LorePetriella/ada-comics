@@ -68,6 +68,7 @@
         <!-- ******************************************
                   MENÚ DE NAVEGACIÓN
       ********************************************* -->
+      <section id="comic-section">
         <nav class="margen-inferior-nav">
           <div class="row">
             <div class="col-12">
@@ -133,7 +134,77 @@
               </div>
             </div>
           </div>
-        </nav>
+        </section>
+
+<section >
+  <nav id="character-section" class="margen-inferior-nav d-none">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="fw-bold">Búsqueda</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 d-flex flex-row align-items-center">
+        <div class="input-group mb-3 align-self-center">
+          <span
+            class="input-group-text border-0 border-bottom rounded-0 border-2 border-dark"
+            id="basic-addon3"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></span>
+          <input
+            type="text"
+            class="form-control border-0 border-bottom rounded-0 border-2 border-dark fs-5 estilo-focus"
+            id="input-busqueda"
+            aria-describedby="input-busqueda"
+            placeholder="Ingresa tu búsqueda"
+          />
+        </div>
+      </div>
+      <div class="col-12 col-sm-6">
+        <div class="d-flex flex-row justify-content-start">
+          <div class="col-6 col-sm-5 d-flex flex-row align-items-center">
+            <label
+              for="select-tipo"
+              class="fw-bold text-secondary margen-derecho"
+              >TIPO</label
+            >
+            <select
+              id="select-type"
+              class="form-select border-0 fw-bold rounded-0 estilo-focus"
+            >
+              <option value="COMICS">COMICS</option>
+              <option value="PERSONAJES">PERSONAJES</option>
+            </select>
+          </div>
+          <div class="col-6 col-sm-5 d-flex flex-row align-items-center">
+            <label
+              for="select-orden"
+              class="fw-bold text-secondary margen-derecho"
+              >ORDEN</label
+            >
+            <select
+              id="select-orden"
+              class="form-select border-0 fw-bold rounded-0 estilo-focus"
+            >
+              <option value="A-Z">A-Z</option>
+              <option value="Z-A">Z-A</option>
+             
+            </select>
+          </div>
+          <div
+            class="col col-sm-2 d-flex flex-row align-items-center btn-margen"
+          >
+            <button type="button" class="btn btn-dark rounded-1">
+              BUSCAR
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+</nav>
 
     <!-- ******************************************
                   SECCIÓN COMICS
@@ -173,27 +244,51 @@
             <p>52839 RESULTADOS</p>
           </div>
         </div>
-
+   <!-- ******************************************
+                 PRELOADER
+    ********************************************* -->
    
-        <div class="indeterminate"></div>
-      </div> -->
+        <div class="indeterminate">
+      </div>
           <div id="contenedor" class="contenedor">
             <span class="loader"></span>
           </div>
-          <div id="root" class="row"></div>
+          <div id="root" class="row">
         </div>
+           <!-- ******************************************
+                PAGINADOR
+    ********************************************* -->
 
         <div class="container-paginador">
           <p>Pagina Actual: <span id="pagina-actual"></span></p>
           <p>Total de paginas: <span id="total-paginas"></span></p>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-lg">
+              <li class="page-item">
+                <a class="page-link text-dark" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item "><a class="page-link text-dark" href="#">1</a></li>
+              <!-- class="page-item disabled" - class="page-item active" -->
+              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>              
+              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link text-dark" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
 
-        <div class="pagination">
+        <!-- <div class="pagination">
           <button
             type="button"
             id="first-page"
             class="first-page pagination-button"
             aria-label="Página previa"
+            
           >
             <i class="fas fa-angle-double-left" aria-hidden="true"></i>
           </button>
@@ -221,16 +316,56 @@
           >
             <i class="fas fa-angle-double-right" aria-hidden="true"></i>
           </button>
-        </div>
-      </div>
+        </div> -->
+      
     </main>
 
     <!-- ******************************************
                        FOOTER
     ********************************************* -->
     <footer id="footer" class="page-footer footer-bg">
-      <div class="row">
-        <div class="footer-copyright copyright">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+          <div class="container d-flex justify-content-evenly ">
+            <span class="text-light"> © 2022 Copyright</span>
+            <a
+              class="text-lighten-4 right text-light"
+              href="https://github.com/LorePetriella"
+              target="_blank"
+              data-message="Enlace a GitHub"
+            >
+              <i
+                class="fa-brands fa-github fa-2xl line-height-icon text-light"
+                aria-hidden="true"
+              ></i>
+              Lore Petriella
+            </a>
+
+            <a
+              class="text-lighten-4 right text-light"
+              href="https://github.com/StefaniaDiazV"
+              target="_blank"
+              data-message="Enlace a GitHub"
+            >
+              <i
+                class="fa-brands fa-github fa-2xl line-height-icon text-light"
+                aria-hidden="true"
+              ></i>
+              Stefanía Diaz
+            </a>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="text-light"> © </span>
+          </button>
+         
+        </div>
+      </nav>
+      <!-- <nav class="navbar  navbar-expand{-sm|-md|-lg|-xl|-xxl } bg-dark">
+        <div class="container-fluid">
           <div class="container">
             <a
               class="grey-text text-lighten-4 right"
@@ -258,13 +393,18 @@
               Stefanía Diaz
             </a>
           </div>
+        </div> -->
+      </nav>
+      <!-- <div class="row">
+        <div class="footer-copyright copyright">
+         
         </div>
         <div class="col l4 offset-l2 s12">
           <h5 class="white-text">
             © 2022 Copyright Stefanía Diaz y Lore Petriella
           </h5>
         </div>
-      </div>
+      </div> -->
     </footer>
 
     <script
