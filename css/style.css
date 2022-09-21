@@ -130,7 +130,7 @@
 }
 .header .banner .titulo {
   flex: 0 0 auto;
-  width: 50%;
+  width: 100%;
   padding-top: 15%;
   text-align: center;
   text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -150,10 +150,6 @@
   margin-left: 20px;
 }
 
-.btn-margen {
-  margin-left: 20px;
-}
-
 .margen-derecho {
   margin-right: 10px;
 }
@@ -168,6 +164,16 @@
 
 .margen-inferior-nav {
   margin-bottom: 4rem;
+}
+
+.box-btn-buscar {
+  margin-left: 5px;
+}
+@media (max-width: 900px) {
+  .box-btn-buscar {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 #section-comics {
