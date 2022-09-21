@@ -68,7 +68,6 @@
         <!-- ******************************************
                   MENÚ DE NAVEGACIÓN
       ********************************************* -->
-      <section id="comic-section">
         <nav class="margen-inferior-nav">
           <div class="row">
             <div class="col-12">
@@ -108,20 +107,34 @@
                     <option value="PERSONAJES">PERSONAJES</option>
                   </select>
                 </div>
-                <div class="col-6 col-sm-5 d-flex flex-row align-items-center">
+                <div id="div-select-comics" class="col-6 col-sm-5 d-flex flex-row align-items-center">
                   <label
-                    for="select-orden"
+                    for="select-orden-comics"
                     class="fw-bold text-secondary margen-derecho"
                     >ORDEN</label
                   >
                   <select
-                    id="select-orden"
+                    id="select-orden-comics"
                     class="form-select border-0 fw-bold rounded-0 estilo-focus"
                   >
                     <option value="A-Z">A-Z</option>
                     <option value="Z-A">Z-A</option>
                     <option value="Más nuevos">Más nuevos</option>
                     <option value="Más viejos">Más viejos</option>
+                  </select>
+                </div>
+                <div id="div-select-character" class="col-6 col-sm-5 d-flex flex-row align-items-center d-none">
+                  <label
+                    for="select-orden-personajes"
+                    class="fw-bold text-secondary margen-derecho"
+                    >ORDEN</label
+                  >
+                  <select
+                    id="select-orden-personajes"
+                    class="form-select border-0 fw-bold rounded-0 estilo-focus"
+                  >
+                    <option value="A-Z">A-Z</option>
+                    <option value="Z-A">Z-A</option>
                   </select>
                 </div>
                 <div
@@ -134,77 +147,7 @@
               </div>
             </div>
           </div>
-        </section>
-
-<section >
-  <nav id="character-section" class="margen-inferior-nav d-none">
-    <div class="row">
-      <div class="col-12">
-        <h4 class="fw-bold">Búsqueda</h4>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-sm-6 d-flex flex-row align-items-center">
-        <div class="input-group mb-3 align-self-center">
-          <span
-            class="input-group-text border-0 border-bottom rounded-0 border-2 border-dark"
-            id="basic-addon3"
-            ><i class="fa-solid fa-magnifying-glass"></i
-          ></span>
-          <input
-            type="text"
-            class="form-control border-0 border-bottom rounded-0 border-2 border-dark fs-5 estilo-focus"
-            id="input-busqueda"
-            aria-describedby="input-busqueda"
-            placeholder="Ingresa tu búsqueda"
-          />
-        </div>
-      </div>
-      <div class="col-12 col-sm-6">
-        <div class="d-flex flex-row justify-content-start">
-          <div class="col-6 col-sm-5 d-flex flex-row align-items-center">
-            <label
-              for="select-tipo"
-              class="fw-bold text-secondary margen-derecho"
-              >TIPO</label
-            >
-            <select
-              id="select-type"
-              class="form-select border-0 fw-bold rounded-0 estilo-focus"
-            >
-              <option value="COMICS">COMICS</option>
-              <option value="PERSONAJES">PERSONAJES</option>
-            </select>
-          </div>
-          <div class="col-6 col-sm-5 d-flex flex-row align-items-center">
-            <label
-              for="select-orden"
-              class="fw-bold text-secondary margen-derecho"
-              >ORDEN</label
-            >
-            <select
-              id="select-orden"
-              class="form-select border-0 fw-bold rounded-0 estilo-focus"
-            >
-              <option value="A-Z">A-Z</option>
-              <option value="Z-A">Z-A</option>
-             
-            </select>
-          </div>
-          <div
-            class="col col-sm-2 d-flex flex-row align-items-center btn-margen"
-          >
-            <button type="button" class="btn btn-dark rounded-1">
-              BUSCAR
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
-
-
-</nav>
+        </nav>
 
     <!-- ******************************************
                   SECCIÓN COMICS
@@ -245,7 +188,7 @@
           </div>
         </div>
    <!-- ******************************************
-                 PRELOADER
+                   PRELOADER
     ********************************************* -->
    
         <div class="indeterminate">
@@ -255,8 +198,8 @@
           </div>
           <div id="root" class="row">
         </div>
-           <!-- ******************************************
-                PAGINADOR
+    <!-- ******************************************
+                  PAGINADOR
     ********************************************* -->
 
         <div class="container-paginador">
