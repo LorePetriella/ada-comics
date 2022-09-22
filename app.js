@@ -75,19 +75,14 @@ inicio.addEventListener("click", () => {
 
 // Vistas secciones
 
-selectComics.addEventListener("click", (e) => {
+const divComicSelect = document.getElementById("div-select-comics");
+const divCharacterSelect = document.getElementById("div-select-character");
+const selectType = document.getElementById("select-tipo");
+
+selectType.addEventListener("click", (e) => {
   if (e.target.value === "COMICS") {
-    comicSection.classList.remove("d-none");
-    characterSection.classList.add("d-none");
-  } else if (e.target.value === "PERSONAJES") {
-    characterSection.classList.remove("d-none");
-    comicSection.classList.add("d-none");
-  }
-});
-selectCharacters.addEventListener("change", (e) => {
-  if (e.target.value === "COMICS") {
-    comicSection.classList.remove("d-none");
-    characterSection.classList.add("d-none");
+    divComicSelect.classList.remove("d-none");
+    divCharacterSelect.classList.add("d-none");
   } else if (e.target.value === "PERSONAJES") {
     characterSection.classList.remove("d-none");
     comicSection.classList.add("d-none");
