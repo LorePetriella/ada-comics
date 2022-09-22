@@ -54,7 +54,7 @@
       <div class="banner">
         <div class="titulo">
           <h1>
-            <span class="ada">ADA</span><span class="comics">COMICS</span>
+            <span class="ada">ADA</span> <span class="comics">COMICS</span>
           </h1>
         </div>
       </div>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-sm-6 d-flex flex-row align-items-center">
+            <div class="col-12 col-lg-6 d-flex flex-row align-items-center">
               <div class="input-group mb-3 align-self-center">
                 <span
                   class="input-group-text border-0 border-bottom rounded-0 border-2 border-dark"
@@ -91,9 +91,9 @@
                 />
               </div>
             </div>
-            <div class="col-12 col-sm-6">
-              <div class="d-flex flex-row justify-content-start">
-                <div class="col-6 col-sm-5 d-flex flex-row align-items-center">
+            <div class="col-12 col-lg-6">
+              <div class="row d-flex flex-row justify-content-start">
+                <div class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center margen-derecho">
                   <label
                     for="select-tipo"
                     class="fw-bold text-secondary margen-derecho"
@@ -107,14 +107,14 @@
                     <option value="PERSONAJES">PERSONAJES</option>
                   </select>
                 </div>
-                <div class="col-6 col-sm-5 d-flex flex-row align-items-center">
+                <div id="div-select-comics" class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center">
                   <label
-                    for="select-orden"
+                    for="select-orden-comics"
                     class="fw-bold text-secondary margen-derecho"
                     >ORDEN</label
                   >
                   <select
-                    id="select-orden"
+                    id="select-orden-comics"
                     class="form-select border-0 fw-bold rounded-0 estilo-focus"
                   >
                     <option value="A-Z">A-Z</option>
@@ -123,10 +123,24 @@
                     <option value="Más viejos">Más viejos</option>
                   </select>
                 </div>
+                <div id="div-select-character" class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center d-none">
+                  <label
+                    for="select-orden-personajes"
+                    class="fw-bold text-secondary margen-derecho"
+                    >ORDEN</label
+                  >
+                  <select
+                    id="select-orden-personajes"
+                    class="form-select border-0 fw-bold rounded-0 estilo-focus"
+                  >
+                    <option value="A-Z">A-Z</option>
+                    <option value="Z-A">Z-A</option>
+                  </select>
+                </div>
                 <div
-                  class="col col-sm-2 d-flex flex-row align-items-center btn-margen"
+                  class="col-12 col-sm-1 col-lg-1  d-flex flex-row align-items-center box-btn-buscar"
                 >
-                  <button type="button" class="btn btn-dark rounded-1">
+                  <button type="button" class="btn btn-dark rounded-1 box-btn-buscar">
                     BUSCAR
                   </button>
                 </div>
@@ -135,7 +149,33 @@
           </div>
         </nav>
 
+    <!-- ******************************************
+                  SECCIÓN COMICS
+    ********************************************* -->
 
+    <section id="section-comics">
+        <img class="comic-portada" src="https://i.annihil.us/u/prod/marvel/i/mg/c/f0/5df3fc8b3c883/clean.jpg" alt="">
+      <div class="info-comic">
+        <h4 class="fw-bold">Superior Spider-Man Vol. 2: Otto-matic (Trade Paperback)</h4>
+        <h5 class="fw-bold">Publicado:</h5>
+        <p>18/12/2019</p>
+        <h5 class="fw-bold">Guionistas:</h5>
+        <p>Christos Gage</p>
+        <h5 class="fw-bold">Descripción:</h5>
+        <p>Collects Superior Spider-Man (2018) #7-12. Like the rest of America, the West Coast has been overrun with Frost Giants! But Otto Octavius doesn’t settle for chaos — he plans to win the War of the Realms single-handedly. Well, maybe not single-handedly. He needs minions. Super-minions! So he recruits…the West Coast Avengers?! Will Otto Octavius and Quentin Quire become BFFs? If they can somehow work together and save San Francisco, Otto will be due a parade — but any celebrations might be short-lived, because someone dangerous is coming. Otto calls himself the Superior Spider-Man? Norman Osborn, the Spider-Man of Earth-44145 you met in SPIDER-GEDDON, begs to differ — and has some very creative ways to prove his true superiority! Norman is out to destroy everything. Does Otto stand a chance of stopping him? Does he even stand a chance at living through this?!</p>
+    </div>
+    </section>
+
+    <!-- ******************************************
+                  SECCIÓN PERSONAJES
+    ********************************************* -->
+      <section id="section-personajes">
+        <img class="retrato-personaje" src="http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg" alt="">
+        <div class="info-personaje">
+          <h4 class="fw-bold">Spider-Man (Peter Parker)</h4>
+          <p>Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.</p>
+        </div>
+      </section>
 
     <!-- ******************************************
                   SECCIÓN RESULTADOS
@@ -147,27 +187,51 @@
             <p>52839 RESULTADOS</p>
           </div>
         </div>
-
+   <!-- ******************************************
+                   PRELOADER
+    ********************************************* -->
    
-        <div class="indeterminate"></div>
-      </div> -->
+        <div class="indeterminate">
+      </div>
           <div id="contenedor" class="contenedor">
             <span class="loader"></span>
           </div>
-          <div id="root" class="row"></div>
+          <div id="root" class="row">
         </div>
+    <!-- ******************************************
+                  PAGINADOR
+    ********************************************* -->
 
         <div class="container-paginador">
           <p>Pagina Actual: <span id="pagina-actual"></span></p>
           <p>Total de paginas: <span id="total-paginas"></span></p>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-lg">
+              <li class="page-item">
+                <a class="page-link text-dark" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item "><a class="page-link text-dark" href="#">1</a></li>
+              <!-- class="page-item disabled" - class="page-item active" -->
+              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>              
+              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link text-dark" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
 
-        <div class="pagination">
+        <!-- <div class="pagination">
           <button
             type="button"
             id="first-page"
             class="first-page pagination-button"
             aria-label="Página previa"
+            
           >
             <i class="fas fa-angle-double-left" aria-hidden="true"></i>
           </button>
@@ -195,18 +259,57 @@
           >
             <i class="fas fa-angle-double-right" aria-hidden="true"></i>
           </button>
-        </div>
-      </div>
+        </div> -->
+      
     </main>
 
     <!-- ******************************************
                        FOOTER
     ********************************************* -->
     <footer id="footer" class="page-footer footer-bg">
-      <div class="row">
-        <div class="footer-copyright copyright">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+          <div class="container d-flex justify-content-evenly ">
+            <span class="text-light"> © 2022 Copyright</span>
+            <a
+              class="text-lighten-4 right text-light"
+              href="https://github.com/LorePetriella"
+              target="_blank"
+              data-message="Enlace a GitHub"
+            >
+              <i
+                class="fa-brands fa-github fa-2xl line-height-icon text-light"
+                aria-hidden="true"
+              ></i>
+              Lore Petriella
+            </a>
+
+            <a
+              class="text-lighten-4 right text-light"
+              href="https://github.com/StefaniaDiazV"
+              target="_blank"
+              data-message="Enlace a GitHub"
+            >
+              <i
+                class="fa-brands fa-github fa-2xl line-height-icon text-light"
+                aria-hidden="true"
+              ></i>
+              Stefanía Diaz
+            </a>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="text-light"> © </span>
+          </button>
+         
+        </div>
+      </nav>
+      <!-- <nav class="navbar  navbar-expand{-sm|-md|-lg|-xl|-xxl } bg-dark">
+        <div class="container-fluid">
           <div class="container">
-            <!-- <a class="grey-text text-lighten-4 right" href="#!"></a> -->
             <a
               class="grey-text text-lighten-4 right"
               href="https://github.com/LorePetriella"
@@ -233,13 +336,18 @@
               Stefanía Diaz
             </a>
           </div>
+        </div> -->
+      </nav>
+      <!-- <div class="row">
+        <div class="footer-copyright copyright">
+         
         </div>
         <div class="col l4 offset-l2 s12">
           <h5 class="white-text">
             © 2022 Copyright Stefanía Diaz y Lore Petriella
           </h5>
         </div>
-      </div>
+      </div> -->
     </footer>
 
     <script

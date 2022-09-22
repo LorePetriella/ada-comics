@@ -130,7 +130,7 @@
 }
 .header .banner .titulo {
   flex: 0 0 auto;
-  width: 50%;
+  width: 100%;
   padding-top: 15%;
   text-align: center;
   text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -150,10 +150,6 @@
   margin-left: 20px;
 }
 
-.btn-margen {
-  margin-left: 20px;
-}
-
 .margen-derecho {
   margin-right: 10px;
 }
@@ -167,7 +163,63 @@
 }
 
 .margen-inferior-nav {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
+}
+
+.box-btn-buscar {
+  margin-left: 5px;
+}
+@media (max-width: 900px) {
+  .box-btn-buscar {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+#section-comics {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3.5rem;
+}
+#section-comics .comic-portada {
+  max-width: 22rem;
+}
+#section-comics .info-comic {
+  margin-left: 4%;
+}
+@media (max-width: 900px) {
+  #section-comics .info-comic {
+    margin-left: 0%;
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 900px) {
+  #section-comics {
+    flex-direction: column;
+  }
+}
+
+#section-personajes {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3.5rem;
+}
+#section-personajes .retrato-personaje {
+  max-width: 22rem;
+}
+#section-personajes .info-personaje {
+  margin-left: 4%;
+}
+@media (max-width: 900px) {
+  #section-personajes .info-personaje {
+    margin-left: 0%;
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 900px) {
+  #section-personajes {
+    flex-direction: column;
+  }
 }
 
 .resultados-info {
@@ -186,9 +238,6 @@
   background-color: black;
   color: #fff;
   padding-top: 20px;
-}
-.body .footer-bg .copyright {
-  background-color: rgba(51, 51, 51, 0);
 }
 
 body {
@@ -329,6 +378,34 @@ body {
 }
 .wrapper.run-animation ~ .images {
   animation: flicker-images 1500ms 2 steps(1, end), fade-out 4500ms forwards;
+}
+
+.container-paginador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.container-paginador .pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+.container-paginador .pagination .pagination-button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  color: white;
+  background-color: black !important;
+  border-color: red;
+}
+.container-paginador .pagination .pagination-button:disabled {
+  color: #757575;
+  border-color: #757575;
 }
 
 * {

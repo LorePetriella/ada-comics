@@ -1,0 +1,18 @@
+#section-personajes{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3.5rem;
+    .retrato-personaje{
+        max-width: 22rem;
+    }
+    .info-personaje{
+        margin-left: 4%;
+        @include responsive(medium){
+            margin-left: 0%;
+            margin-top: 2rem;
+        }
+    }
+    @include responsive(medium){
+        flex-direction: column;
+    }
+}
