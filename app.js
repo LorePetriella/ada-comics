@@ -3,15 +3,15 @@ const privateKey = "28546d1565fb610d445047ee5409883b002faab6";
 const baseUrl = `http://gateway.marvel.com/v1/public/`;
 let offSet = 0;
 
-selectComics;
-const elements = (el) => {
-  document.querySelector(el);
-};
+// selectComics;
+// const elements = (el) => {
+//   document.querySelector(el);
+// };
 
-const getSearchParams = (isSearch) => {
-  let searchParams = `?apikey=${publicKey}&offSet=${offSet}`;
-  const type = elements("#select-tipo").value;
-};
+// const getSearchParams = (isSearch) => {
+//   let searchParams = `?apikey=${publicKey}&offSet=${offSet}`;
+//   const type = elements("#select-tipo").value;
+// };
 
 const element = document.getElementById("animate");
 const header = document.querySelector(".header");
@@ -84,8 +84,8 @@ selectType.addEventListener("click", (e) => {
     divComicSelect.classList.remove("d-none");
     divCharacterSelect.classList.add("d-none");
   } else if (e.target.value === "PERSONAJES") {
-    characterSection.classList.remove("d-none");
-    comicSection.classList.add("d-none");
+    divCharacterSelect.classList.remove("d-none");
+    divComicSelect.classList.add("d-none");
   }
 });
 
