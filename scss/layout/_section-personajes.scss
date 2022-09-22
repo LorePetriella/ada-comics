@@ -16,3 +16,27 @@
         flex-direction: column;
     }
 }
+
+.card-personaje{
+    overflow: hidden;
+    .imagen{
+        z-index: 0;
+    }
+    .nombre-personaje{
+        background-color: black;
+        z-index: 1;
+    }
+    &:hover{
+        .imagen{
+            transform: scale(1.2);
+            transition-duration: .6s ;
+        }
+        .nombre-personaje{
+            background-color: #dc3545;
+        }
+    }
+ }
+
+
+
+
