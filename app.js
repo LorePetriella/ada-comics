@@ -1,5 +1,27 @@
 const publicKey = "1a42c8351bfeecbe486fbaf76a0bdaaf";
 const privateKey = "28546d1565fb610d445047ee5409883b002faab6";
+const baseUrl = `http://gateway.marvel.com/v1/public/`;
+let offSet = 0;
+
+selectComics;
+const elements = (el) => {
+  document.querySelector(el);
+};
+
+const getSearchParams = (isSearch) => {
+  let searchParams = `?apikey=${publicKey}&offSet=${offSet}`;
+  const type = elements("#select-tipo").value;
+};
+
+const element = document.getElementById("animate");
+const header = document.querySelector(".header");
+const main = document.querySelector("main");
+const footer = document.getElementById("footer");
+const body = document.getElementById("body");
+const comicSection = document.getElementById("comic-section");
+const characterSection = document.getElementById("character-section");
+const selectComics = document.getElementById("select-tipo");
+const selectCharacters = document.getElementById("select-type");
 
 const getData = () => {
   const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}`;
@@ -12,12 +34,6 @@ const getData = () => {
 getData();
 
 // Animación logo
-
-const element = document.getElementById("animate");
-const header = document.querySelector(".header");
-const main = document.querySelector("main");
-const footer = document.getElementById("footer");
-const body = document.getElementById("body");
 
 if (element) {
   // reset the transition by...
@@ -68,11 +84,10 @@ selectType.addEventListener("click", (e) => {
     divComicSelect.classList.remove("d-none");
     divCharacterSelect.classList.add("d-none");
   } else if (e.target.value === "PERSONAJES") {
-    divCharacterSelect.classList.remove("d-none");
-    divComicSelect.classList.add("d-none");
+    characterSection.classList.remove("d-none");
+    comicSection.classList.add("d-none");
   }
 });
-
 
 // Paginator
 
