@@ -18,13 +18,17 @@
 }
 
 .card-personaje{
+    width: 180px;
     overflow: hidden;
     .imagen{
         z-index: 0;
+        width: 100%;
+        height: 100%;
     }
     .nombre-personaje{
         background-color: black;
         z-index: 1;
+        height: 140px
     }
     &:hover{
         .imagen{
@@ -37,6 +41,21 @@
     }
  }
 
+ img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .cuadros2{
+    height: 400px;
+    width: 200px;
+    margin-bottom: 2%;
+  }
+  
+  .cuadros {
+    height: 300px;
+    width: 200px;
+  }
 
 
 
