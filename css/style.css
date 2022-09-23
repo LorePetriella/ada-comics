@@ -222,6 +222,24 @@
   }
 }
 
+.card-personaje {
+  overflow: hidden;
+}
+.card-personaje .imagen {
+  z-index: 0;
+}
+.card-personaje .nombre-personaje {
+  background-color: black;
+  z-index: 1;
+}
+.card-personaje:hover .imagen {
+  transform: scale(1.2);
+  transition-duration: 0.6s;
+}
+.card-personaje:hover .nombre-personaje {
+  background-color: #dc3545;
+}
+
 .resultados-info {
   margin-bottom: 1rem;
 }
