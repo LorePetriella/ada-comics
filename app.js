@@ -23,15 +23,84 @@ const characterSection = document.getElementById("character-section");
 const selectComics = document.getElementById("select-tipo");
 const selectCharacters = document.getElementById("select-type");
 
-const getData = () => {
-  const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}`;
+// const getData = () => {
+//   const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}`;
 
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((json) => console.log(json))
-    .catch((err) => console.error(err));
+//   fetch(url)
+//     .then((resp) => resp.json())
+//     .then((json) => console.log(json))
+//     .catch((err) => console.error(err));
+// };
+// getData();
+
+const searchType =  document.querySelector('#select-tipo')
+
+const getSearchParmas = (inSearch) => {
+  let url = baseUrl;
+  // console.log(elemento('#select-tipo').value)
+  let searchParamas = `?apikey=${publicKey}&offset=${offSet}`
+  if(searchType.value === 'comics'){
+      url += `${searchType.value}${searchParamas}`;
+      fetch(url)
+      .then(resp =>resp.json())
+       .then(json => printComics(json))
+       .catch(err => console.error(err))
+  }
+  if(searchType.value === 'characters'){
+      url += `${searchType.value}${searchParamas}`;
+      fetch(url)
+      .then(resp =>resp.json())
+       .then(json => printPersonaje(json))
+       .catch(err => console.error(err))
+  }
+  console.log(url)
+
 };
-getData();
+getSearchParmas()
+
+const btnBuscar = document.getElementById('btn-buscar')
+const boxResults = document.getElementById('box-results')
+
+btnBuscar.addEventListener('click', () => {
+    getSearchParmas()
+})
+
+const  printComics = (json) => {
+  let results =  json.data.results
+  console.log(results)
+  let card = ''
+  results.forEach(element => {
+      const {title,thumbnail} = element
+      card += `
+      <div class="cuadros2 margen-derecho" >
+      <div class="cuadros">
+      <img
+        src="${thumbnail.path}.${thumbnail.extension}"
+      />
+      </div>
+      ${title}
+      </div>`
+  });
+  boxResults.innerHTML = card
+};
+
+const printPersonaje = (json) => {
+  let results =  json.data.results
+  console.log(results)
+  let card = ''
+  results.forEach(element => {
+      const {name,thumbnail} = element
+      card += `<div class="card card-personaje" style="width: 180px;">
+      <img src="${thumbnail.path}.${thumbnail.extension}" class="card-img-top imagen" alt="...">
+      <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4" style="height: 140px;">
+        <p class="card-text">${name}</p>
+      </div>
+    </div>`
+  });
+  boxResults.innerHTML = card
+};
+
+
 
 // Animación logo
 
