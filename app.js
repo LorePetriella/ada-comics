@@ -3,6 +3,7 @@ const header = document.querySelector(".header");
 const main = document.querySelector("main");
 const footer = document.getElementById("footer");
 const body = document.getElementById("body");
+
 const comicSection = document.getElementById("section-comics");
 const characterSection = document.getElementById("section-personajes");
 
