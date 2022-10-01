@@ -1,106 +1,35 @@
-const publicKey = "1a42c8351bfeecbe486fbaf76a0bdaaf";
-const privateKey = "28546d1565fb610d445047ee5409883b002faab6";
-const baseUrl = `http://gateway.marvel.com/v1/public/`;
-let offSet = 0;
-
-// selectComics;
-// const elements = (el) => {
-//   document.querySelector(el);
-// };
-
-// const getSearchParams = (isSearch) => {
-//   let searchParams = `?apikey=${publicKey}&offSet=${offSet}`;
-//   const type = elements("#select-tipo").value;
-// };
-
 const element = document.getElementById("animate");
 const header = document.querySelector(".header");
 const main = document.querySelector("main");
 const footer = document.getElementById("footer");
 const body = document.getElementById("body");
-const comicSection = document.getElementById("comic-section");
-const characterSection = document.getElementById("character-section");
-const selectComics = document.getElementById("select-tipo");
-const selectCharacters = document.getElementById("select-type");
 
-// const getData = () => {
-//   const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}`;
+const comicSection = document.getElementById("section-comics");
+const characterSection = document.getElementById("section-personajes");
 
-//   fetch(url)
-//     .then((resp) => resp.json())
-//     .then((json) => console.log(json))
-//     .catch((err) => console.error(err));
-// };
-// getData();
+const divComicSelect = document.getElementById("div-select-comics");
+const divCharacterSelect = document.getElementById("div-select-character");
+const selectType = document.getElementById("select-tipo");
 
-const searchType =  document.querySelector('#select-tipo')
+const init = document.getElementById("enter-btn"); //btn enter
+const presentation = document.getElementById("presentation-container");
+const resultsCounter = document.getElementById("results-counter");
+const cardGroup = document.getElementById("card-group");
 
-const getSearchParmas = (inSearch) => {
-  let url = baseUrl;
-  // console.log(elemento('#select-tipo').value)
-  let searchParamas = `?apikey=${publicKey}&offset=${offSet}`
-  if(searchType.value === 'comics'){
-      url += `${searchType.value}${searchParamas}`;
-      fetch(url)
-      .then(resp =>resp.json())
-       .then(json => printComics(json))
-       .catch(err => console.error(err))
-  }
-  if(searchType.value === 'characters'){
-      url += `${searchType.value}${searchParamas}`;
-      fetch(url)
-      .then(resp =>resp.json())
-       .then(json => printPersonaje(json))
-       .catch(err => console.error(err))
-  }
-  console.log(url)
+const firstPage = document.getElementById("first");
+const previousPage = document.getElementById("previous");
+const lastPage = document.getElementById("last");
+const nextPage = document.getElementById("next");
 
-};
-getSearchParmas()
+const resultsNumber = document.querySelector(".results-number");
 
-const btnBuscar = document.getElementById('btn-buscar')
-const boxResults = document.getElementById('box-results')
+//elementos comic section
 
-btnBuscar.addEventListener('click', () => {
-    getSearchParmas()
-})
-
-const  printComics = (json) => {
-  let results =  json.data.results
-  console.log(results)
-  let card = ''
-  results.forEach(element => {
-      const {title,thumbnail} = element
-      card += `
-      <div class="cuadros2 margen-derecho" >
-      <div class="cuadros">
-      <img
-        src="${thumbnail.path}.${thumbnail.extension}"
-      />
-      </div>
-      ${title}
-      </div>`
-  });
-  boxResults.innerHTML = card
-};
-
-const printPersonaje = (json) => {
-  let results =  json.data.results
-  console.log(results)
-  let card = ''
-  results.forEach(element => {
-      const {name,thumbnail} = element
-      card += `<div class="card card-personaje" style="width: 180px;">
-      <img src="${thumbnail.path}.${thumbnail.extension}" class="card-img-top imagen" alt="...">
-      <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4" style="height: 140px;">
-        <p class="card-text">${name}</p>
-      </div>
-    </div>`
-  });
-  boxResults.innerHTML = card
-};
-
-
+const comicImg = document.querySelector(".comic-cover");
+const comicTitle = document.querySelector(".comic-title");
+const comicReleaseDate = document.querySelector(".comic-release-date");
+const comicWriters = document.querySelector(".comic-writers");
+const comicDescription = document.querySelector(".comic-description");
 
 // Animación logo
 
@@ -130,10 +59,7 @@ if (element.classList.contains("run-animation")) {
   footer.classList.add("d-none");
 }
 
-const inicio = document.getElementById("enter-btn"); //btn enter
-const presentation = document.getElementById("presentation-container");
-
-inicio.addEventListener("click", () => {
+init.addEventListener("click", () => {
   presentation.classList.add("d-none");
   header.classList.remove("d-none");
   main.classList.remove("d-none");
@@ -144,116 +70,198 @@ inicio.addEventListener("click", () => {
 
 // Vistas secciones
 
-const divComicSelect = document.getElementById("div-select-comics");
-const divCharacterSelect = document.getElementById("div-select-character");
-const selectType = document.getElementById("select-tipo");
-
 selectType.addEventListener("click", (e) => {
-  if (e.target.value === "COMICS") {
+  if (e.target.value === "comics") {
     divComicSelect.classList.remove("d-none");
     divCharacterSelect.classList.add("d-none");
-  } else if (e.target.value === "PERSONAJES") {
+  } else if (e.target.value === "characters") {
     divCharacterSelect.classList.remove("d-none");
     divComicSelect.classList.add("d-none");
   }
 });
 
-// Paginator
+const publicKey = "1a42c8351bfeecbe486fbaf76a0bdaaf";
+const privateKey = "28546d1565fb610d445047ee5409883b002faab6";
+const baseUrl = `http://gateway.marvel.com/v1/public/`;
+// const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}`;
+let offSet = 0;
+let resultsCount = 0;
+//Retorna última parte de la URL-------------------------------------------------------------
+const getSearchParams = (isSearch) => {
+  // let url = baseUrl;
+  let searchParams = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
+  if (!isSearch) {
+    return searchParams;
+  } //este if es para que no se queje porque no se usa
 
-// const paginaActual = document.getElementById("pagina-actual");
-// const totalPaginas = document.getElementById("total-paginas");
-// const nextPage = document.getElementById("next-page");
-// const firstPage = document.getElementById("first-page");
-// const previusPage = document.getElementById("previus-page");
-// const lastPage = document.getElementById("last-page");
+  // if (selectType.value === "comics") {
+  //   searchParams += `${selectType.value}${searchParams}`;
+  // }
 
-// let pagina = 1;
-// let total = 0;
+  return searchParams;
+};
+//Función que arma la URL------------------------------------------------------------------
+const getApiUrl = (resourse, resourseId, subResourse) => {
+  const isSearch = !resourseId && !subResourse;
+  let url = `${baseUrl}${resourse}`;
+  // console.log(url); //http://gateway.marvel.com/v1/public/comics Hasta acá tengo esta parte de la URL
 
-// const pagination = async (promesa) => {
-//   const result = await promesa;
-//   nextPage.addEventListener("click", () => {
-//     pagina += 1;
-//     getData();
-//   });
-//   previusPage.addEventListener("click", () => {
-//     pagina -= 1;
-//     getData();
-//   });
-//   lastPage.addEventListener("click", () => {
-//     if (pagina < result.info.pages) {
-//       pagina = result.info.pages;
-//       getData();
-//     }
-//   });
-//   firstPage.addEventListener("click", () => {
-//     if (pagina > 2) {
-//       pagina = 1;
-//       getData();
-//     }
-//   });
-// };
+  if (resourseId) {
+    url += `/${resourseId}`;
+  }
 
-// const updatePagination = () => {
-//   if (pagina <= 1) {
-//     previusPage.disabled = true;
-//     firstPage.disabled = true;
-//   } else {
-//     previusPage.disabled = false;
-//     firstPage.disabled = false;
-//   }
-//   if (pagina === total) {
-//     nextPage.disabled = true;
-//     lastPage.disabled = true;
-//   } else {
-//     nextPage.disabled = false;
-//     lastPage.disabled = false;
-//   }
-// };
+  if (subResourse) {
+    url += `/${subResourse}`;
+  }
+  url += getSearchParams(isSearch);
+  return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
+};
+getApiUrl("comics");
 
-// const pagination = async (promesa) => {
-//   const result = await promesa;
-//   nextPage.addEventListener("click", () => {
-//     pagina += 1;
-//     getData();
-//   });
-//   previusPage.addEventListener("click", () => {
-//     pagina -= 1;
-//     getData();
-//   });
-//   lastPage.addEventListener("click", () => {
-//     if (pagina < result.info.pages) {
-//       pagina = result.info.pages;
-//       getData();
-//     }
-//   });
-//   firstPage.addEventListener("click", () => {
-//     if (pagina > 2) {
-//       pagina = 1;
-//       getData();
-//     }
-//   });
-// };
+const updateResultsCounter = (count) => {
+  resultsNumber.innerHTML = count;
+  resultsCount = count;
+};
 
-// const updatePagination = () => {
-//   if (pagina <= 1) {
-//     previusPage.disabled = true;
-//     firstPage.disabled = true;
-//   } else {
-//     previusPage.disabled = false;
-//     firstPage.disabled = false;
-//   }
-//   if (pagina === total) {
-//     nextPage.disabled = true;
-//     lastPage.disabled = true;
-//   } else {
-//     nextPage.disabled = false;
-//     lastPage.disabled = false;
-//   }
-// };
+const fetchUrl = async (url) => {
+  const response = await fetch(url);
+  const json = await response.json();
+  return json;
+};
 
-// $(document).ready(function () {
-//   $(".dropdown-trigger").dropdown();
-//   pagination(getData());
-//   updatePagination();
-// });
+const fetchComics = async () => {
+  const {
+    data: { results, total },
+  } = await fetchUrl(getApiUrl("comics"));
+
+  printComics(results);
+  updateResultsCounter(total);
+};
+
+//Función para pintar los comics en las cards
+const printComics = (comics) => {
+  if (comics.lenght === 0) {
+    comicCard.innerHTML =
+      '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
+  }
+
+  for (const comic of comics) {
+    const comicCard = document.createElement("div");
+    comicCard.tabIndex = 0;
+    comicCard.classList.add("comic");
+    comicCard.onclick = () => {
+      // resetOffset();
+      fetchComic(comic.id);
+      showComicDetail();
+      // fetchComicCharacters(comic.id);
+      // updatePaginationCallback(() => fetchComicCharacters(comic.id));
+    };
+    comicCard.innerHTML = `
+    <div class="comic-img-container">
+    <img src="${comic.thumbnail.path}/portrait_incredible.${comic.thumbnail.extension}" alt="${comic.title}" class="comic-thumbnail" />
+  </div>
+  <p class="comic-title">${comic.title}</p>`;
+
+    cardGroup.append(comicCard);
+  }
+};
+
+const fetchComic = async (comicId) => {
+  const {
+    data: {
+      results: [comic],
+    },
+  } = await fetchUrl(getApiUrl("comics", comicId));
+
+  const coverPath = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
+  const releaseDate = new Intl.DateTimeFormat("es-AR").format(
+    new Date(comic.dates.find((date) => date.type === "onsaleDate").date)
+  );
+  console.log(releaseDate);
+  const writers = comic.creators.items
+    .filter((creator) => creator.role === "writer")
+    .map((creator) => creator.name)
+    .join(",");
+  updateComicDetails(
+    coverPath,
+    comic.title,
+    releaseDate,
+    writers,
+    comic.description
+  );
+  showComicDetail();
+};
+
+const updateComicDetails = (img, title, releaseDate, writers, description) => {
+  comicImg.src = img;
+  comicTitle.innerHTML = title;
+  comicReleaseDate.innerHTML = releaseDate;
+  comicWriters.innerHTML = writers;
+  comicDescription.innerHTML = description;
+};
+
+const showComicDetail = () => {
+  comicSection.classList.remove("d-none");
+  // cardGroup.classList.add("d-none");
+};
+
+const search = () => {
+  if (selectType.value === "comics") {
+    fetchComics();
+  }
+};
+
+//PAGINATOR
+
+const updatePaginationCallback = (callback) => {
+  firstPage.onclick = () => {
+    offset = 0;
+    callback();
+  };
+
+  previousPage.onclick = () => {
+    offset -= 20;
+    if (offset < 0) {
+      offset = 0;
+    }
+    callback();
+  };
+
+  nextPage.onclick = () => {
+    offset += 20;
+    callback();
+  };
+
+  lastPage.onclick = () => {
+    const isExact = resultsCount % 20 === 0;
+    const pages = Math.floor(resultsCount / 20);
+    offset = (isExact ? pages - 1 : pages) * 20;
+    callback();
+  };
+};
+
+const updatePagination = () => {
+  if (offset === 0) {
+    firstPage.disabled = true;
+    previousPage.disabled = true;
+  } else {
+    firstPage.disabled = false;
+    previousPage.disabled = false;
+  }
+
+  if (offset + 20 >= resultsCount) {
+    lastPage.disabled = true;
+    nextPage.disabled = true;
+  } else {
+    lastPage.disabled = false;
+    nextPage.disabled = false;
+  }
+};
+
+const inicio = () => {
+  search();
+  // updatePaginationCallback(search);
+  getApiUrl();
+};
+
+window.onload = inicio;

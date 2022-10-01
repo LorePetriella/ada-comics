@@ -1,20 +1,62 @@
-#section-personajes{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 3.5rem;
-    .retrato-personaje{
-        max-width: 22rem;
+#section-personajes {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3.5rem;
+  .retrato-personaje {
+    max-width: 22rem;
+  }
+  .info-personaje {
+    margin-left: 4%;
+    @include responsive(medium) {
+      margin-left: 0%;
+      margin-top: 2rem;
     }
-    .info-personaje{
-        margin-left: 4%;
-        @include responsive(medium){
-            margin-left: 0%;
-            margin-top: 2rem;
-        }
+  }
+  @include responsive(medium) {
+    flex-direction: column;
+  }
+}
+.card-personaje {
+  width: 180px;
+  overflow: hidden;
+  .imagen {
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .nombre-personaje {
+    background-color: black;
+    z-index: 1;
+    height: 140px;
+  }
+  &:hover {
+    .imagen {
+      transform: scale(1.2);
+      transition-duration: 0.6s;
     }
-    @include responsive(medium){
-        flex-direction: column;
+    .nombre-personaje {
+      background-color: #dc3545;
     }
+
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.cuadros2 {
+  height: 400px;
+  width: 200px;
+  margin-bottom: 2%;
+}
+
+.cuadros {
+  height: 300px;
+  width: 200px;
+}
+
 }
 
 .card-personaje{
@@ -56,6 +98,7 @@
     height: 300px;
     width: 200px;
   }
+
 
 
 
