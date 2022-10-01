@@ -1,0 +1,48 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  min-height: 300px;
+}
+
+.comic {
+  width: calc(100% / 5 - 2 * 10px);
+  margin: 0 10px 40px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  &:focus {
+    outline: 0;
+    .comic-thumbnail {
+      transform: translateY(-10px);
+    }
+    .comic-title {
+      color: #ed1d23;
+    }
+  }
+  &:hover {
+    .comic-thumbnail {
+      transform: translateY(-10px);
+    }
+    .comic-title {
+      color: #ed1d23;
+    }
+  }
+  .comic-title {
+    font-size: 14px;
+    transition: 0.2s;
+    height: 64px;
+    margin-top: 25px;
+    font-weight: bold;
+  }
+}
+.comic-thumbnail {
+  height: 100%;
+  box-shadow: 0 26px 24px -16px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
+  transform: translateY(0);
+  transition: 0.2s;
+}
+.comic-img-container {
+  flex-grow: 1;
+}

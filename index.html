@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <title>ADAComics</title>
   </head>
-  <body id="body">
+  <body id="body" class="principal">
     <div id="presentation-container">
       <div class="wrapper run-animation" id="animate">
         <div class="row">
@@ -65,6 +65,7 @@
     ********************************************* -->
     <main class="main">
       <div class="container d-flex flex-column justify-content-center">
+   
         <!-- ******************************************
                   MENÚ DE NAVEGACIÓN
       ********************************************* -->
@@ -103,8 +104,8 @@
                     id="select-tipo"
                     class="form-select border-0 fw-bold rounded-0 estilo-focus"
                   >
-                    <option value="COMICS">COMICS</option>
-                    <option value="PERSONAJES">PERSONAJES</option>
+                    <option value="comics">COMICS</option>
+                    <option value="characters">PERSONAJES</option>
                   </select>
                 </div>
                 <div id="div-select-comics" class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center">
@@ -148,45 +149,60 @@
             </div>
           </div>
         </nav>
-
+      </div>
+  
     <!-- ******************************************
                   SECCIÓN COMICS
     ********************************************* -->
 
-    <section id="section-comics">
-        <img class="comic-portada" src="https://i.annihil.us/u/prod/marvel/i/mg/c/f0/5df3fc8b3c883/clean.jpg" alt="">
+    <section id="section-comics" class="d-none">
+     
+        <img class="comic-cover" src="" alt="">
       <div class="info-comic">
-        <h4 class="fw-bold">Superior Spider-Man Vol. 2: Otto-matic (Trade Paperback)</h4>
-        <h5 class="fw-bold">Publicado:</h5>
+        <h4 class="fw-bold comic-title"></h4>
+        <h5 class="fw-bold comic-release-date">Publicado:</h5>
         <p>18/12/2019</p>
-        <h5 class="fw-bold">Guionistas:</h5>
+        <h5 class="fw-bold comic-wrtiters">Guionistas:</h5>
         <p>Christos Gage</p>
-        <h5 class="fw-bold">Descripción:</h5>
-        <p>Collects Superior Spider-Man (2018) #7-12. Like the rest of America, the West Coast has been overrun with Frost Giants! But Otto Octavius doesn’t settle for chaos — he plans to win the War of the Realms single-handedly. Well, maybe not single-handedly. He needs minions. Super-minions! So he recruits…the West Coast Avengers?! Will Otto Octavius and Quentin Quire become BFFs? If they can somehow work together and save San Francisco, Otto will be due a parade — but any celebrations might be short-lived, because someone dangerous is coming. Otto calls himself the Superior Spider-Man? Norman Osborn, the Spider-Man of Earth-44145 you met in SPIDER-GEDDON, begs to differ — and has some very creative ways to prove his true superiority! Norman is out to destroy everything. Does Otto stand a chance of stopping him? Does he even stand a chance at living through this?!</p>
+        <h5 class="fw-bold comic-description">Descripción:</h5>
+        <p></p>
     </div>
     </section>
 
     <!-- ******************************************
                   SECCIÓN PERSONAJES
     ********************************************* -->
-      <section id="section-personajes">
+      <section id="section-personajes" class="d-none">
         <img class="retrato-personaje" src="http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg" alt="">
         <div class="info-personaje">
           <h4 class="fw-bold">Spider-Man (Peter Parker)</h4>
           <p>Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.</p>
         </div>
       </section>
-
-    <!-- ******************************************
+<!-- ******************************************
                   SECCIÓN RESULTADOS
     ********************************************* -->
-
-        <div class="resultados-info">
-          <h4 class="fw-bold">Resultados</h4>
-          <div class="fs-6 text-secondary fw-bold">
-            <p>52839 RESULTADOS</p>
+    <section>
+      <div class="container d-flex flex-column justify-content-center">
+  
+      <div  class="resultados-info">
+        <h4 class="fw-bold">Resultados</h4>
+        <div id="results-counter" class="fs-6 text-secondary fw-bold">
+          <p class="results-count"> <span class="results-number">0</span> RESULTADOS</p>
+        </div>
+        <div id= "card-group" class="cards"></div>
+        <div id="box-results" class="d-flex flex-wrap d-none">
+          <div class="card card-personaje">
+            <img src="http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350/portrait_uncanny.jpg" class="card-img-top imagen" alt="...">
+            <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4">
+              <p class="card-text">Thor (Marvel Heroes)</p>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+  
    <!-- ******************************************
                    PRELOADER
     ********************************************* -->
@@ -202,64 +218,29 @@
                   PAGINADOR
     ********************************************* -->
 
-        <div class="container-paginador">
-          <p>Pagina Actual: <span id="pagina-actual"></span></p>
-          <p>Total de paginas: <span id="total-paginas"></span></p>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-lg">
-              <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item "><a class="page-link text-dark" href="#">1</a></li>
-              <!-- class="page-item disabled" - class="page-item active" -->
-              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>              
-              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+     
 
-        <!-- <div class="pagination">
-          <button
-            type="button"
-            id="first-page"
-            class="first-page pagination-button"
-            aria-label="Página previa"
-            
-          >
+
+        <div class="pagination">
+          <button  id="first" type="button" class="first-page pagination-button" aria-label="Página previa" disabled="">
             <i class="fas fa-angle-double-left" aria-hidden="true"></i>
           </button>
-          <button
-            type="button"
-            id="previus-page"
-            class="previous-page pagination-button"
-            aria-label="Página Anterior"
-          >
+          <button id="previous" type="button" class="previous-page pagination-button" aria-label="Página Anterior" disabled="">
             <i class="fas fa-angle-left" aria-hidden="true"></i>
           </button>
-          <button
-            type="button"
-            id="next-page"
-            class="next-page pagination-button"
-            aria-label="Siguiente Página"
-          >
+          <button id="next" type="button" class="next-page pagination-button" aria-label="Siguiente ´Página">
             <i class="fas fa-angle-right" aria-hidden="true"></i>
           </button>
-          <button
-            type="button"
-            id="last-page"
-            class="last-page pagination-button"
-            aria-label="Última página"
-          >
+          <button id="last" type="button" class="last-page pagination-button" aria-label="Última página">
             <i class="fas fa-angle-double-right" aria-hidden="true"></i>
           </button>
-        </div> -->
+        </div>
+
+
+
+
+
+
       
     </main>
 
