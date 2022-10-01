@@ -7,7 +7,11 @@ const body = document.getElementById("body");
 const comicSection = document.getElementById("section-comics");
 const characterSection = document.getElementById("section-personajes");
 
+const inputSearch = document.getElementById("input-search");
+const btnSearch = document.getElementById("btn-search")
+
 const divComicSelect = document.getElementById("div-select-comics");
+const selectOrderComics = document.getElementById("select-order-comics");
 const divCharacterSelect = document.getElementById("div-select-character");
 const selectType = document.getElementById("select-tipo");
 
@@ -89,16 +93,19 @@ let resultsCount = 0;
 //Retorna última parte de la URL-------------------------------------------------------------
 const getSearchParams = (isSearch) => {
   // let url = baseUrl;
-  let searchParams = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
-  if (!isSearch) {
-    return searchParams;
-  } //este if es para que no se queje porque no se usa
+  let searchParamsId = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
+  let searchParams =   `&offset=${offSet}&apikey=${publicKey}`
+  console.log(isSearch)
+  if(isSearch === false){
+    return searchParamsId;
+  }
+  //este if es para que no se queje porque no se usa
 
   // if (selectType.value === "comics") {
   //   searchParams += `${selectType.value}${searchParams}`;
   // }
 
-  return searchParams;
+  return searchParams
 };
 //Función que arma la URL------------------------------------------------------------------
 const getApiUrl = (resourse, resourseId, subResourse) => {
@@ -113,10 +120,21 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
   if (subResourse) {
     url += `/${subResourse}`;
   }
+
+  if(inputSearch.value && resourse === 'comics' && !resourseId){
+    url += `?titleStartsWith=${inputSearch.value}`
+  }
+ 
+  if(inputSearch.value && resourse === 'characters' && !resourseId ){
+    url += `?nameStartsWith=${inputSearch.value}`
+  }
+
+  url += `${inputSearch.value ? '&' : '?'}orderBy=title`
+
   url += getSearchParams(isSearch);
   return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
-getApiUrl("comics");
+//getApiUrl("comics");
 
 const updateResultsCounter = (count) => {
   resultsNumber.innerHTML = count;
@@ -140,6 +158,7 @@ const fetchComics = async () => {
 
 //Función para pintar los comics en las cards
 const printComics = (comics) => {
+  cardGroup.innerHTML = ''
   if (comics.lenght === 0) {
     comicCard.innerHTML =
       '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
@@ -213,55 +232,59 @@ const search = () => {
 
 //PAGINATOR
 
-const updatePaginationCallback = (callback) => {
-  firstPage.onclick = () => {
-    offset = 0;
-    callback();
-  };
+// const updatePaginationCallback = (callback) => {
+//   firstPage.onclick = () => {
+//     offset = 0;
+//     callback();
+//   };
 
-  previousPage.onclick = () => {
-    offset -= 20;
-    if (offset < 0) {
-      offset = 0;
-    }
-    callback();
-  };
+//   previousPage.onclick = () => {
+//     offset -= 20;
+//     if (offset < 0) {
+//       offset = 0;
+//     }
+//     callback();
+//   };
 
-  nextPage.onclick = () => {
-    offset += 20;
-    callback();
-  };
+//   nextPage.onclick = () => {
+//     offset += 20;
+//     callback();
+//   };
 
-  lastPage.onclick = () => {
-    const isExact = resultsCount % 20 === 0;
-    const pages = Math.floor(resultsCount / 20);
-    offset = (isExact ? pages - 1 : pages) * 20;
-    callback();
-  };
-};
+//   lastPage.onclick = () => {
+//     const isExact = resultsCount % 20 === 0;
+//     const pages = Math.floor(resultsCount / 20);
+//     offset = (isExact ? pages - 1 : pages) * 20;
+//     callback();
+//   };
+// };
 
-const updatePagination = () => {
-  if (offset === 0) {
-    firstPage.disabled = true;
-    previousPage.disabled = true;
-  } else {
-    firstPage.disabled = false;
-    previousPage.disabled = false;
-  }
+// const updatePagination = () => {
+//   if (offset === 0) {
+//     firstPage.disabled = true;
+//     previousPage.disabled = true;
+//   } else {
+//     firstPage.disabled = false;
+//     previousPage.disabled = false;
+//   }
 
-  if (offset + 20 >= resultsCount) {
-    lastPage.disabled = true;
-    nextPage.disabled = true;
-  } else {
-    lastPage.disabled = false;
-    nextPage.disabled = false;
-  }
-};
+//   if (offset + 20 >= resultsCount) {
+//     lastPage.disabled = true;
+//     nextPage.disabled = true;
+//   } else {
+//     lastPage.disabled = false;
+//     nextPage.disabled = false;
+//   }
+// };
+
+btnSearch.addEventListener('click', () => {
+  search()
+})
 
 const inicio = () => {
   search();
   // updatePaginationCallback(search);
-  getApiUrl();
+  //getApiUrl();
 };
 
 window.onload = inicio;
