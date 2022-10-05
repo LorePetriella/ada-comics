@@ -176,8 +176,9 @@ const printComics = (comics) => {
       // resetOffset();
       fetchComic(comic.id);
       showComicDetail();
-      hideCards();
-      // fetchComicCharacters(comic.id);
+      clearResults()
+      //hideCards();
+      fetchComicCharacters(comic.id);
       // updatePaginationCallback(() => fetchComicCharacters(comic.id));
     };
     comicCard.innerHTML = `
@@ -214,6 +215,13 @@ const fetchComic = async (comicId) => {
     comic.description
   );
   showComicDetail();
+};
+
+const fetchComicCharacters = async (comicId) => {
+  const {data : { results, total}} = await fetchUrl(getApiUrl('comics', comicId, 'characters'));
+    updateResultsCounter(total)
+    //updatePagination(total)
+    printCharacters(results)
 };
 
 const updateComicDetails = (img, title, releaseDate, writers, description) => {
@@ -265,8 +273,9 @@ const printCharacters = (characters) => {
     characterCard.onclick = () => {
       // resetOffset();
       // fetchCharacter(character.id);
-      showCharacterDetail();
-      // fetchComicCharacters(comic.id);
+      //showCharacterDetail();
+      clearResults()
+      fetchCharacterComics(character.id);
       // updatePaginationCallback(() => fetchComicCharacters(comic.id));
     };
     characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
@@ -280,6 +289,14 @@ const printCharacters = (characters) => {
 
     cardGroup.append(characterCard);
   }
+};
+
+const fetchCharacterComics = async (characterId) => {
+  const {data : { results, total}} = await fetchUrl(getApiUrl('characters', characterId, 'comics'))
+    printComics(results)
+    console.log(results)
+    updateResultsCounter(total)
+   // updatePagination(total)
 };
 
 const search = () => {
