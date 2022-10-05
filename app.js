@@ -8,7 +8,6 @@ const header = document.querySelector(".header");
 const main = document.querySelector("main");
 const footer = document.getElementById("footer");
 const body = document.getElementById("body");
-
 const comicSection = document.getElementById("section-comics");
 const comicsGroup = document.getElementById("comics-result");
 
@@ -16,10 +15,10 @@ const characterSection = document.getElementById("section-personajes");
 
 //SEARCH NAV
 const divComicSelect = document.getElementById("div-select-comics");
-const selectOrderComics = document.getElementById("select-order-comics");
 const divCharacterSelect = document.getElementById("div-select-character");
 const selectType = document.getElementById("select-tipo");
-const searchBtn = document.querySelector("#search-btn");
+const inputSearch = document.getElementById("input-search");
+const btnSearch = document.querySelector("#btn-search");
 
 //SECTRION RESULTS ELEMENTS
 const resultsCounter = document.getElementById("results-counter");
@@ -99,13 +98,11 @@ let resultsCount = 0;
 //Retorna última parte de la URL-------------------------------------------------------------
 const getSearchParams = (isSearch) => {
   // let url = baseUrl;
-  let searchParamsId = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
-  let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
-  console.log(isSearch);
-  if (isSearch === false) {
-    return searchParamsId;
-  }
-  //este if es para que no se queje porque no se usa
+  let searchParams = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
+  // let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
+  if (!isSearch) {
+    return searchParams;
+  } //este if es para que no se queje porque no se usa
 
   // if (selectType.value === "comics") {
   //   searchParams += `${selectType.value}${searchParams}`;
@@ -113,6 +110,7 @@ const getSearchParams = (isSearch) => {
 
   return searchParams;
 };
+
 //Función que arma la URL------------------------------------------------------------------
 const getApiUrl = (resourse, resourseId, subResourse) => {
   const isSearch = !resourseId && !subResourse;
@@ -127,20 +125,20 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
     url += `/${subResourse}`;
   }
 
-  if (inputSearch.value && resourse === "comics" && !resourseId) {
-    url += `?titleStartsWith=${inputSearch.value}`;
-  }
+  // if (inputSearch.value && resourse === "comics" && !resourseId) {
+  //   url += `?titleStartsWith=${inputSearch.value}`;
+  // }
 
-  if (inputSearch.value && resourse === "characters" && !resourseId) {
-    url += `?nameStartsWith=${inputSearch.value}`;
-  }
+  // if (inputSearch.value && resourse === "characters" && !resourseId) {
+  //   url += `?nameStartsWith=${inputSearch.value}`;
+  // }
 
-  url += `${inputSearch.value ? "&" : "?"}orderBy=title`;
+  // url += `${inputSearch.value ? "&" : "?"}orderBy=title`;
 
   url += getSearchParams(isSearch);
   return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
-getApiUrl("comics");
+// getApiUrl("comics");
 
 const updateResultsCounter = (count) => {
   resultsNumber.innerHTML = count;
@@ -164,7 +162,6 @@ const fetchComics = async () => {
 
 //Función para pintar los comics en las cards
 const printComics = (comics) => {
-  cardGroup.innerHTML = "";
   if (comics.lenght === 0) {
     comicCard.innerHTML =
       '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
@@ -204,7 +201,7 @@ const fetchComic = async (comicId) => {
   const releaseDate = new Intl.DateTimeFormat("es-AR").format(
     new Date(comic.dates.find((date) => date.type === "onsaleDate").date)
   );
-  console.log(releaseDate);
+
   const writers = comic.creators.items
     .filter((creator) => creator.role === "writer")
     .map((creator) => creator.name)
@@ -267,7 +264,7 @@ const printCharacters = (characters) => {
     characterCard.classList.add("comic");
     characterCard.onclick = () => {
       // resetOffset();
-      fetchCharacter(character.id);
+      // fetchCharacter(character.id);
       showCharacterDetail();
       // fetchComicCharacters(comic.id);
       // updatePaginationCallback(() => fetchComicCharacters(comic.id));
@@ -295,7 +292,7 @@ const clearResults = () => {
   cardGroup.innerHTML = "";
 };
 
-searchBtn.addEventListener("click", () => {
+btnSearch.addEventListener("click", () => {
   if (selectType.value === "comics") {
     hideComicDetail();
     clearResults();
@@ -356,6 +353,10 @@ searchBtn.addEventListener("click", () => {
 //   }
 // };
 
+// btnSearch.addEventListener("click", () => {
+//   search();
+// });
+
 const inicio = () => {
   search();
 
@@ -363,4 +364,4 @@ const inicio = () => {
   getApiUrl();
 };
 
-window.onload = inicio();
+window.onload = inicio;
