@@ -178,8 +178,7 @@
 
 #section-comics {
   display: flex;
-  flex-direction: row;
-  margin-bottom: 3.5rem;
+  margin: 80px 10px 50px;
 }
 #section-comics .comic-portada {
   max-width: 22rem;
@@ -197,6 +196,11 @@
   #section-comics {
     flex-direction: column;
   }
+}
+
+.comic-cover {
+  max-width: 350px;
+  margin-right: 50px;
 }
 
 #section-personajes {

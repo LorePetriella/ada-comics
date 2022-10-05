@@ -1,26 +1,35 @@
+//ANIMATION ELEMENTS
 const element = document.getElementById("animate");
+const init = document.getElementById("enter-btn"); //btn enter
+const presentation = document.getElementById("presentation-container");
+
+//SECTIONS
 const header = document.querySelector(".header");
 const main = document.querySelector("main");
 const footer = document.getElementById("footer");
 const body = document.getElementById("body");
 const comicSection = document.getElementById("section-comics");
+const comicsGroup = document.getElementById("comics-result");
+
 const characterSection = document.getElementById("section-personajes");
 
+//SEARCH NAV
 const divComicSelect = document.getElementById("div-select-comics");
 const divCharacterSelect = document.getElementById("div-select-character");
 const selectType = document.getElementById("select-tipo");
+const searchBtn = document.querySelector("#search-btn");
 
-const init = document.getElementById("enter-btn"); //btn enter
-const presentation = document.getElementById("presentation-container");
+//SECTRION RESULTS ELEMENTS
 const resultsCounter = document.getElementById("results-counter");
+const resultsNumber = document.querySelector(".results-number");
 const cardGroup = document.getElementById("card-group");
+// const charactersCards = document.getElementById("character-group");
 
+//PAGINATOR ELEMENTS
 const firstPage = document.getElementById("first");
 const previousPage = document.getElementById("previous");
 const lastPage = document.getElementById("last");
 const nextPage = document.getElementById("next");
-
-const resultsNumber = document.querySelector(".results-number");
 
 //elementos comic section
 
@@ -132,7 +141,7 @@ const fetchComics = async () => {
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("comics"));
-
+  console.log(results);
   printComics(results);
   updateResultsCounter(total);
 };
@@ -148,10 +157,12 @@ const printComics = (comics) => {
     const comicCard = document.createElement("div");
     comicCard.tabIndex = 0;
     comicCard.classList.add("comic");
+    comicCard.setAttribute("id", "comics-result");
     comicCard.onclick = () => {
       // resetOffset();
       fetchComic(comic.id);
       showComicDetail();
+      hideCards();
       // fetchComicCharacters(comic.id);
       // updatePaginationCallback(() => fetchComicCharacters(comic.id));
     };
@@ -176,11 +187,11 @@ const fetchComic = async (comicId) => {
   const releaseDate = new Intl.DateTimeFormat("es-AR").format(
     new Date(comic.dates.find((date) => date.type === "onsaleDate").date)
   );
-  console.log(releaseDate);
+
   const writers = comic.creators.items
     .filter((creator) => creator.role === "writer")
     .map((creator) => creator.name)
-    .join(",");
+    .join(", ");
   updateComicDetails(
     coverPath,
     comic.title,
@@ -201,66 +212,138 @@ const updateComicDetails = (img, title, releaseDate, writers, description) => {
 
 const showComicDetail = () => {
   comicSection.classList.remove("d-none");
-  // cardGroup.classList.add("d-none");
+};
+
+const hideComicDetail = () => {
+  comicSection.classList.add("d-none");
+};
+
+const hideCards = () => {
+  cardGroup.classList.add("d-none");
+};
+
+const showCards = () => {
+  cardGroup.classList.remove("d-none");
+};
+// CHARACTERS
+
+const fetchCharacters = async () => {
+  const {
+    data: { results, total },
+  } = await fetchUrl(getApiUrl("characters"));
+  console.log(results);
+
+  printCharacters(results);
+  updateResultsCounter(total);
+};
+
+const printCharacters = (characters) => {
+  if (characters.lenght === 0) {
+    characterCard.innerHTML =
+      '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
+  }
+
+  for (const character of characters) {
+    const characterCard = document.createElement("div");
+    characterCard.tabIndex = 0;
+
+    characterCard.classList.add("comic");
+    characterCard.onclick = () => {
+      // resetOffset();
+      fetchCharacter(character.id);
+      showCharacterDetail();
+      // fetchComicCharacters(comic.id);
+      // updatePaginationCallback(() => fetchComicCharacters(comic.id));
+    };
+    characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
+  <div class="card card-personaje">
+    <img src="${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}" class="card-img-top imagen" alt="${character.name}">
+    <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4">
+      <p class="card-text">${character.name}</p>
+    </div>
+  </div>
+</div> `;
+
+    cardGroup.append(characterCard);
+  }
 };
 
 const search = () => {
-  if (selectType.value === "comics") {
+  if (selectType.value == "comics") {
     fetchComics();
   }
 };
 
+const clearResults = () => {
+  cardGroup.innerHTML = "";
+};
+
+searchBtn.addEventListener("click", () => {
+  if (selectType.value === "comics") {
+    hideComicDetail();
+    clearResults();
+    search();
+    showCards();
+  } else if (selectType.value === "characters") {
+    hideComicDetail();
+    clearResults();
+    fetchCharacters();
+    showCards();
+  }
+});
+
 //PAGINATOR
 
-const updatePaginationCallback = (callback) => {
-  firstPage.onclick = () => {
-    offset = 0;
-    callback();
-  };
+// const updatePaginationCallback = (callback) => {
+//   firstPage.onclick = () => {
+//     offset = 0;
+//     callback();
+//   };
 
-  previousPage.onclick = () => {
-    offset -= 20;
-    if (offset < 0) {
-      offset = 0;
-    }
-    callback();
-  };
+//   previousPage.onclick = () => {
+//     offset -= 20;
+//     if (offset < 0) {
+//       offset = 0;
+//     }
+//     callback();
+//   };
 
-  nextPage.onclick = () => {
-    offset += 20;
-    callback();
-  };
+//   nextPage.onclick = () => {
+//     offset += 20;
+//     callback();
+//   };
 
-  lastPage.onclick = () => {
-    const isExact = resultsCount % 20 === 0;
-    const pages = Math.floor(resultsCount / 20);
-    offset = (isExact ? pages - 1 : pages) * 20;
-    callback();
-  };
-};
+//   lastPage.onclick = () => {
+//     const isExact = resultsCount % 20 === 0;
+//     const pages = Math.floor(resultsCount / 20);
+//     offset = (isExact ? pages - 1 : pages) * 20;
+//     callback();
+//   };
+// };
 
-const updatePagination = () => {
-  if (offset === 0) {
-    firstPage.disabled = true;
-    previousPage.disabled = true;
-  } else {
-    firstPage.disabled = false;
-    previousPage.disabled = false;
-  }
+// const updatePagination = () => {
+//   if (offset === 0) {
+//     firstPage.disabled = true;
+//     previousPage.disabled = true;
+//   } else {
+//     firstPage.disabled = false;
+//     previousPage.disabled = false;
+//   }
 
-  if (offset + 20 >= resultsCount) {
-    lastPage.disabled = true;
-    nextPage.disabled = true;
-  } else {
-    lastPage.disabled = false;
-    nextPage.disabled = false;
-  }
-};
+//   if (offset + 20 >= resultsCount) {
+//     lastPage.disabled = true;
+//     nextPage.disabled = true;
+//   } else {
+//     lastPage.disabled = false;
+//     nextPage.disabled = false;
+//   }
+// };
 
 const inicio = () => {
   search();
+
   // updatePaginationCallback(search);
   getApiUrl();
 };
 
-window.onload = inicio;
+window.onload = inicio();
