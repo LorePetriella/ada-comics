@@ -273,8 +273,9 @@ const printCharacters = (characters) => {
     characterCard.onclick = () => {
       // resetOffset();
       // fetchCharacter(character.id);
-      showCharacterDetail();
-      // fetchComicCharacters(comic.id);
+      //showCharacterDetail();
+      clearResults()
+      fetchCharacterComics(character.id);
       // updatePaginationCallback(() => fetchComicCharacters(comic.id));
     };
     characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
@@ -288,6 +289,14 @@ const printCharacters = (characters) => {
 
     cardGroup.append(characterCard);
   }
+};
+
+const fetchCharacterComics = async (characterId) => {
+  const {data : { results, total}} = await fetchUrl(getApiUrl('characters', characterId, 'comics'))
+    printComics(results)
+    console.log(results)
+    updateResultsCounter(total)
+   // updatePagination(total)
 };
 
 const search = () => {
