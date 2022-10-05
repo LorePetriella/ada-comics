@@ -1,18 +1,24 @@
-#section-comics{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 3.5rem;
-    .comic-portada{
-        max-width: 22rem;
+#section-comics {
+  display: flex;
+
+  margin: 80px 10px 50px;
+
+  .comic-portada {
+    max-width: 22rem;
+  }
+  .info-comic {
+    margin-left: 4%;
+    @include responsive(medium) {
+      margin-left: 0%;
+      margin-top: 2rem;
     }
-    .info-comic{
-        margin-left: 4%;
-        @include responsive(medium){
-            margin-left: 0%;
-            margin-top: 2rem;
-        }
-    }
-    @include responsive(medium){
-        flex-direction: column;
-    }
+  }
+  @include responsive(medium) {
+    flex-direction: column;
+  }
+}
+
+.comic-cover {
+  max-width: 350px;
+  margin-right: 50px;
 }
