@@ -176,10 +176,6 @@
   }
 }
 
-#section-comics {
-  display: flex;
-  margin: 80px 10px 50px;
-}
 #section-comics .comic-portada {
   max-width: 22rem;
 }
