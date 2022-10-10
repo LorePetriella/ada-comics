@@ -16,11 +16,13 @@ const characterSection = document.getElementById("section-personajes");
 //SEARCH NAV
 const divComicSelect = document.getElementById("div-select-comics");
 const divCharacterSelect = document.getElementById("div-select-character");
+const selectOrderComics = document.getElementById("select-order-comics");
+const selectOrderCharacters = document.getElementById("select-order-characters");
 const selectType = document.getElementById("select-tipo");
 const inputSearch = document.getElementById("input-search");
 const btnSearch = document.querySelector("#btn-search");
 
-//SECTRION RESULTS ELEMENTS
+//SECTION RESULTS ELEMENTS
 const resultsCounter = document.getElementById("results-counter");
 const resultsNumber = document.querySelector(".results-number");
 const cardGroup = document.getElementById("card-group");
@@ -98,10 +100,10 @@ let resultsCount = 0;
 //Retorna última parte de la URL-------------------------------------------------------------
 const getSearchParams = (isSearch) => {
   // let url = baseUrl;
-  let searchParams = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
-  // let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
+  let searchParamsId = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
+  let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
   if (!isSearch) {
-    return searchParams;
+    return searchParamsId;
   } //este if es para que no se queje porque no se usa
 
   // if (selectType.value === "comics") {
@@ -133,12 +135,22 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
   //   url += `?nameStartsWith=${inputSearch.value}`;
   // }
 
-  // url += `${inputSearch.value ? "&" : "?"}orderBy=title`;
+  url += OrderResults(isSearch,resourse)
 
   url += getSearchParams(isSearch);
   return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
 // getApiUrl("comics");
+
+const OrderResults = (isSearch, resourse) => {
+  if(isSearch && resourse === 'comics'){
+    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderComics.value}`;
+  } else if (isSearch && resourse === 'characters'){
+    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderCharacters.value}`;
+  } else {
+    return ''
+  }
+};
 
 const updateResultsCounter = (count) => {
   resultsNumber.innerHTML = count;
