@@ -42,6 +42,12 @@ const comicReleaseDate = document.querySelector(".comic-release-date");
 const comicWriters = document.querySelector(".comic-writers");
 const comicDescription = document.querySelector(".comic-description");
 
+// ELEMENTOS CHARACTER SECTION 
+
+const characterImg = document.querySelector(".character-img");
+const characterName = document.querySelector(".character-name");
+const characterDescription = document.querySelector(".character-description");
+
 // Animación logo
 
 if (element) {
@@ -228,6 +234,7 @@ const fetchComic = async (comicId) => {
     comic.description
   );
   showComicDetail();
+  hideCharacterDetails();
 };
 
 const fetchComicCharacters = async (comicId) => {
@@ -285,8 +292,8 @@ const printCharacters = (characters) => {
     characterCard.classList.add("comic");
     characterCard.onclick = () => {
       // resetOffset();
-      // fetchCharacter(character.id);
-      //showCharacterDetail();
+      fetchCharacter(character.id);
+      showCharacterDetails();
       clearResults()
       fetchCharacterComics(character.id);
       // updatePaginationCallback(() => fetchComicCharacters(comic.id));
@@ -302,6 +309,27 @@ const printCharacters = (characters) => {
 
     cardGroup.append(characterCard);
   }
+};
+
+const fetchCharacter = async (characterId) => {
+  const {data:{results:[character]}} = await fetchUrl(getApiUrl('characters',characterId));
+  const coverPath = `${character.thumbnail.path}.${character.thumbnail.extension}`;
+  characterDetails(character.name, coverPath, character.description);
+  hideComicDetail()
+}
+
+const characterDetails = (name,image,description) => {
+  characterImg.src = image;
+  characterName.innerHTML = name;
+  characterDescription.innerHTML = description;
+};
+
+const showCharacterDetails = () => {
+  characterSection.classList.remove('d-none');
+};
+
+const hideCharacterDetails = () => {
+  characterSection.classList.add("d-none");
 };
 
 const fetchCharacterComics = async (characterId) => {
@@ -325,11 +353,13 @@ const clearResults = () => {
 btnSearch.addEventListener("click", () => {
   if (selectType.value === "comics") {
     hideComicDetail();
+    hideCharacterDetails();
     clearResults();
     search();
     showCards();
   } else if (selectType.value === "characters") {
     hideComicDetail();
+    hideCharacterDetails();
     clearResults();
     fetchCharacters();
     showCards();
