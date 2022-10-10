@@ -16,11 +16,13 @@ const characterSection = document.getElementById("section-personajes");
 //SEARCH NAV
 const divComicSelect = document.getElementById("div-select-comics");
 const divCharacterSelect = document.getElementById("div-select-character");
+const selectOrderComics = document.getElementById("select-order-comics");
+const selectOrderCharacters = document.getElementById("select-order-characters");
 const selectType = document.getElementById("select-tipo");
 const inputSearch = document.getElementById("input-search");
 const btnSearch = document.querySelector("#btn-search");
 
-//SECTRION RESULTS ELEMENTS
+//SECTION RESULTS ELEMENTS
 const resultsCounter = document.getElementById("results-counter");
 const resultsNumber = document.querySelector(".results-number");
 const cardGroup = document.getElementById("card-group");
@@ -95,19 +97,35 @@ const baseUrl = `http://gateway.marvel.com/v1/public/`;
 // const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}`;
 let offSet = 0;
 let resultsCount = 0;
+
+const searchByName = (isSearch, resourse) => {
+  if(inputSearch.value && isSearch && resourse === 'comics'){
+    return `?titleStartsWith=${inputSearch.value}`;
+  }else if(inputSearch.value && isSearch && resourse === 'characters'){
+    return `?nameStartsWith=${inputSearch.value}`;
+  } else{
+    return ''
+  };
+};
+
+const OrderResults = (isSearch, resourse) => {
+  if(isSearch && resourse === 'comics'){
+    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderComics.value}`;
+  } else if (isSearch && resourse === 'characters'){
+    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderCharacters.value}`;
+  } else {
+    return ''
+  };
+};
+
 //Retorna última parte de la URL-------------------------------------------------------------
 const getSearchParams = (isSearch) => {
   // let url = baseUrl;
-  let searchParams = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
-  // let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
+  let searchParamsId = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
+  let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
   if (!isSearch) {
-    return searchParams;
-  } //este if es para que no se queje porque no se usa
-
-  // if (selectType.value === "comics") {
-  //   searchParams += `${selectType.value}${searchParams}`;
-  // }
-
+    return searchParamsId;
+  } 
   return searchParams;
 };
 
@@ -125,20 +143,15 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
     url += `/${subResourse}`;
   }
 
-  // if (inputSearch.value && resourse === "comics" && !resourseId) {
-  //   url += `?titleStartsWith=${inputSearch.value}`;
-  // }
+  url += searchByName(isSearch, resourse)
 
-  // if (inputSearch.value && resourse === "characters" && !resourseId) {
-  //   url += `?nameStartsWith=${inputSearch.value}`;
-  // }
-
-  // url += `${inputSearch.value ? "&" : "?"}orderBy=title`;
+  url += OrderResults(isSearch,resourse)
 
   url += getSearchParams(isSearch);
+
   return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
-// getApiUrl("comics");
+
 
 const updateResultsCounter = (count) => {
   resultsNumber.innerHTML = count;
