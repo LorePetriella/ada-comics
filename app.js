@@ -97,6 +97,27 @@ const baseUrl = `http://gateway.marvel.com/v1/public/`;
 // const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}`;
 let offSet = 0;
 let resultsCount = 0;
+
+const searchByName = (isSearch, resourse) => {
+  if(inputSearch.value && isSearch && resourse === 'comics'){
+    return `?titleStartsWith=${inputSearch.value}`;
+  }else if(inputSearch.value && isSearch && resourse === 'characters'){
+    return `?nameStartsWith=${inputSearch.value}`;
+  } else{
+    return ''
+  };
+};
+
+const OrderResults = (isSearch, resourse) => {
+  if(isSearch && resourse === 'comics'){
+    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderComics.value}`;
+  } else if (isSearch && resourse === 'characters'){
+    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderCharacters.value}`;
+  } else {
+    return ''
+  };
+};
+
 //Retorna última parte de la URL-------------------------------------------------------------
 const getSearchParams = (isSearch) => {
   // let url = baseUrl;
@@ -104,12 +125,7 @@ const getSearchParams = (isSearch) => {
   let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
   if (!isSearch) {
     return searchParamsId;
-  } //este if es para que no se queje porque no se usa
-
-  // if (selectType.value === "comics") {
-  //   searchParams += `${selectType.value}${searchParams}`;
-  // }
-
+  } 
   return searchParams;
 };
 
@@ -127,30 +143,15 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
     url += `/${subResourse}`;
   }
 
-  // if (inputSearch.value && resourse === "comics" && !resourseId) {
-  //   url += `?titleStartsWith=${inputSearch.value}`;
-  // }
-
-  // if (inputSearch.value && resourse === "characters" && !resourseId) {
-  //   url += `?nameStartsWith=${inputSearch.value}`;
-  // }
+  url += searchByName(isSearch, resourse)
 
   url += OrderResults(isSearch,resourse)
 
   url += getSearchParams(isSearch);
+
   return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
-// getApiUrl("comics");
 
-const OrderResults = (isSearch, resourse) => {
-  if(isSearch && resourse === 'comics'){
-    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderComics.value}`;
-  } else if (isSearch && resourse === 'characters'){
-    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderCharacters.value}`;
-  } else {
-    return ''
-  }
-};
 
 const updateResultsCounter = (count) => {
   resultsNumber.innerHTML = count;
