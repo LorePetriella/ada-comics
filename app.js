@@ -17,7 +17,9 @@ const characterSection = document.getElementById("section-personajes");
 const divComicSelect = document.getElementById("div-select-comics");
 const divCharacterSelect = document.getElementById("div-select-character");
 const selectOrderComics = document.getElementById("select-order-comics");
-const selectOrderCharacters = document.getElementById("select-order-characters");
+const selectOrderCharacters = document.getElementById(
+  "select-order-characters"
+);
 const selectType = document.getElementById("select-tipo");
 const inputSearch = document.getElementById("input-search");
 const btnSearch = document.querySelector("#btn-search");
@@ -42,11 +44,13 @@ const comicReleaseDate = document.querySelector(".comic-release-date");
 const comicWriters = document.querySelector(".comic-writers");
 const comicDescription = document.querySelector(".comic-description");
 
-// ELEMENTOS CHARACTER SECTION 
+// ELEMENTOS CHARACTER SECTION
 
 const characterImg = document.querySelector(".character-img");
 const characterName = document.querySelector(".character-name");
 const characterDescription = document.querySelector(".character-description");
+
+const loaderContainer = document.querySelector(".loader-container");
 
 // Animación logo
 
@@ -97,31 +101,38 @@ selectType.addEventListener("click", (e) => {
   }
 });
 
+//LOADER
+
+const hideLoader = () => loaderContainer.classList.add("d-none");
+const showLoader = () => loaderContainer.classList.remove("d-none");
+
 const publicKey = "1a42c8351bfeecbe486fbaf76a0bdaaf";
 const privateKey = "28546d1565fb610d445047ee5409883b002faab6";
-const baseUrl = `http://gateway.marvel.com/v1/public/`;
+const baseUrl = `https://gateway.marvel.com/v1/public/`;
 // const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}`;
 let offSet = 0;
 let resultsCount = 0;
 
 const searchByName = (isSearch, resourse) => {
-  if(inputSearch.value && isSearch && resourse === 'comics'){
+  if (inputSearch.value && isSearch && resourse === "comics") {
     return `?titleStartsWith=${inputSearch.value}`;
-  }else if(inputSearch.value && isSearch && resourse === 'characters'){
+  } else if (inputSearch.value && isSearch && resourse === "characters") {
     return `?nameStartsWith=${inputSearch.value}`;
-  } else{
-    return ''
-  };
+  } else {
+    return "";
+  }
 };
 
 const OrderResults = (isSearch, resourse) => {
-  if(isSearch && resourse === 'comics'){
+  if (isSearch && resourse === "comics") {
     return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderComics.value}`;
-  } else if (isSearch && resourse === 'characters'){
-    return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderCharacters.value}`;
+  } else if (isSearch && resourse === "characters") {
+    return `${inputSearch.value ? "&" : "?"}orderBy=${
+      selectOrderCharacters.value
+    }`;
   } else {
-    return ''
-  };
+    return "";
+  }
 };
 
 //Retorna última parte de la URL-------------------------------------------------------------
@@ -131,7 +142,7 @@ const getSearchParams = (isSearch) => {
   let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
   if (!isSearch) {
     return searchParamsId;
-  } 
+  }
   return searchParams;
 };
 
@@ -149,15 +160,14 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
     url += `/${subResourse}`;
   }
 
-  url += searchByName(isSearch, resourse)
+  url += searchByName(isSearch, resourse);
 
-  url += OrderResults(isSearch,resourse)
+  url += OrderResults(isSearch, resourse);
 
   url += getSearchParams(isSearch);
 
   return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
-
 
 const updateResultsCounter = (count) => {
   resultsNumber.innerHTML = count;
@@ -171,12 +181,15 @@ const fetchUrl = async (url) => {
 };
 
 const fetchComics = async () => {
+  showLoader();
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("comics"));
+  showLoader();
 
   printComics(results);
   updateResultsCounter(total);
+  hideLoader();
 };
 
 //Función para pintar los comics en las cards
@@ -195,7 +208,7 @@ const printComics = (comics) => {
       // resetOffset();
       fetchComic(comic.id);
       showComicDetail();
-      clearResults()
+      clearResults();
       //hideCards();
       fetchComicCharacters(comic.id);
       // updatePaginationCallback(() => fetchComicCharacters(comic.id));
@@ -211,6 +224,7 @@ const printComics = (comics) => {
 };
 
 const fetchComic = async (comicId) => {
+  showLoader();
   const {
     data: {
       results: [comic],
@@ -235,13 +249,18 @@ const fetchComic = async (comicId) => {
   );
   showComicDetail();
   hideCharacterDetails();
+  hideLoader();
 };
 
 const fetchComicCharacters = async (comicId) => {
-  const {data : { results, total}} = await fetchUrl(getApiUrl('comics', comicId, 'characters'));
-    updateResultsCounter(total)
-    //updatePagination(total)
-    printCharacters(results)
+  showLoader();
+  const {
+    data: { results, total },
+  } = await fetchUrl(getApiUrl("comics", comicId, "characters"));
+  updateResultsCounter(total);
+  //updatePagination(total)
+  printCharacters(results);
+  hideLoader();
 };
 
 const updateComicDetails = (img, title, releaseDate, writers, description) => {
@@ -270,6 +289,7 @@ const showCards = () => {
 // CHARACTERS
 
 const fetchCharacters = async () => {
+  showLoader();
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("characters"));
@@ -277,6 +297,7 @@ const fetchCharacters = async () => {
 
   printCharacters(results);
   updateResultsCounter(total);
+  hideLoader();
 };
 
 const printCharacters = (characters) => {
@@ -294,7 +315,7 @@ const printCharacters = (characters) => {
       // resetOffset();
       fetchCharacter(character.id);
       showCharacterDetails();
-      clearResults()
+      clearResults();
       fetchCharacterComics(character.id);
       // updatePaginationCallback(() => fetchComicCharacters(comic.id));
     };
@@ -312,20 +333,26 @@ const printCharacters = (characters) => {
 };
 
 const fetchCharacter = async (characterId) => {
-  const {data:{results:[character]}} = await fetchUrl(getApiUrl('characters',characterId));
+  showLoader();
+  const {
+    data: {
+      results: [character],
+    },
+  } = await fetchUrl(getApiUrl("characters", characterId));
   const coverPath = `${character.thumbnail.path}.${character.thumbnail.extension}`;
   characterDetails(character.name, coverPath, character.description);
-  hideComicDetail()
-}
+  hideComicDetail();
+  hideLoader();
+};
 
-const characterDetails = (name,image,description) => {
+const characterDetails = (name, image, description) => {
   characterImg.src = image;
   characterName.innerHTML = name;
   characterDescription.innerHTML = description;
 };
 
 const showCharacterDetails = () => {
-  characterSection.classList.remove('d-none');
+  characterSection.classList.remove("d-none");
 };
 
 const hideCharacterDetails = () => {
@@ -333,11 +360,13 @@ const hideCharacterDetails = () => {
 };
 
 const fetchCharacterComics = async (characterId) => {
-  const {data : { results, total}} = await fetchUrl(getApiUrl('characters', characterId, 'comics'))
-    printComics(results)
-    console.log(results)
-    updateResultsCounter(total)
-   // updatePagination(total)
+  const {
+    data: { results, total },
+  } = await fetchUrl(getApiUrl("characters", characterId, "comics"));
+  printComics(results);
+  console.log(results);
+  updateResultsCounter(total);
+  // updatePagination(total)
 };
 
 const search = () => {
@@ -419,7 +448,7 @@ btnSearch.addEventListener("click", () => {
 
 const inicio = () => {
   search();
-
+  // showLoader();
   // updatePaginationCallback(search);
   getApiUrl();
 };

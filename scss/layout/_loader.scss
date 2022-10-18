@@ -1,0 +1,21 @@
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  background-size: cover;
+  background-position: absolute;
+
+  .thor {
+    transform: translateZ(1px);
+
+    width: 300px;
+    height: 300px;
+    margin: 8px;
+    background: transparent;
+    animation: ld-flip-h 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+}
