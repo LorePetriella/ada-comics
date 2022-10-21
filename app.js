@@ -35,6 +35,8 @@ const firstPage = document.getElementById("first");
 const previousPage = document.getElementById("previous");
 const lastPage = document.getElementById("last");
 const nextPage = document.getElementById("next");
+const currentPageDiv = document.getElementById("current-page");
+const totalPages = document.getElementById('total-pages');
 
 //elementos comic section
 
@@ -172,6 +174,7 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
 const updateResultsCounter = (count) => {
   resultsNumber.innerHTML = count;
   resultsCount = count;
+  updatePagination(resultsCount)
 };
 
 const fetchUrl = async (url) => {
@@ -194,6 +197,7 @@ const fetchComics = async () => {
 
 //Función para pintar los comics en las cards
 const printComics = (comics) => {
+  clearResults()
   if (comics.lenght === 0) {
     comicCard.innerHTML =
       '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
@@ -294,13 +298,14 @@ const fetchCharacters = async () => {
     data: { results, total },
   } = await fetchUrl(getApiUrl("characters"));
   console.log(results);
-
+  
   printCharacters(results);
   updateResultsCounter(total);
   hideLoader();
 };
 
 const printCharacters = (characters) => {
+  clearResults()
   if (characters.lenght === 0) {
     characterCard.innerHTML =
       '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
@@ -317,7 +322,10 @@ const printCharacters = (characters) => {
       showCharacterDetails();
       clearResults();
       fetchCharacterComics(character.id);
-      // updatePaginationCallback(() => fetchComicCharacters(comic.id));
+      // updatePaginationFuntion(fetchCharacterComics.bind(null,character.id)
+      //   // function() {
+      //   // fetchCharacterComics(character.id)}
+      //   )
     };
     characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
   <div class="card card-personaje">
@@ -373,56 +381,75 @@ const search = () => {
   if (selectType.value == "comics") {
     fetchComics();
   }
+  if(selectType.value === 'characters'){
+    fetchCharacters();
+  }
 };
 
 const clearResults = () => {
   cardGroup.innerHTML = "";
 };
 
+const clearPageCount = () => {
+  currentPage = 1;
+  offSet = 0;
+};
+
+let currentPage = 1
+
+
 btnSearch.addEventListener("click", () => {
-  if (selectType.value === "comics") {
     hideComicDetail();
     hideCharacterDetails();
     clearResults();
+    clearPageCount();
     search();
     showCards();
-  } else if (selectType.value === "characters") {
-    hideComicDetail();
-    hideCharacterDetails();
-    clearResults();
-    fetchCharacters();
-    showCards();
-  }
 });
 
 //PAGINATOR
 
-// const updatePaginationCallback = (callback) => {
-//   firstPage.onclick = () => {
-//     offset = 0;
-//     callback();
-//   };
 
-//   previousPage.onclick = () => {
-//     offset -= 20;
-//     if (offset < 0) {
-//       offset = 0;
-//     }
-//     callback();
-//   };
+const updatePaginationFuntion = (funcion) => {
+  firstPage.addEventListener('click', ()=> {
+  offSet = 0
+  currentPage = 1
+  funcion()
+  console.log('hola')
+  })
+  nextPage.addEventListener('click', (e)=> {
+    e.preventDefault();
+    offSet += 20
+    currentPage += 1
+    funcion()
+    console.log('hola')
+  })
+  previousPage.addEventListener('click', ()=> {
+    offSet -= 20
+    currentPage -= 1
+    funcion()
+    console.log('hola')
+  })
+  lastPage.addEventListener('click', ()=> {
+    let totalPages = Math.floor(resultsCount/20)
+    let totalRestResults = (resultsCount% 20);
+    let OtroPages = Math.ceil(resultsCount/20)
+    let otroTotal =  totalPages * 20
+    console.log(totalPages)
+    console.log(totalRestResults)
+    console.log(otroTotal)
+    offSet = otroTotal
+    currentPage = OtroPages
+    funcion()
+    console.log('hola')
+    //total = ceil()
+  })
+};
 
-//   nextPage.onclick = () => {
-//     offset += 20;
-//     callback();
-//   };
-
-//   lastPage.onclick = () => {
-//     const isExact = resultsCount % 20 === 0;
-//     const pages = Math.floor(resultsCount / 20);
-//     offset = (isExact ? pages - 1 : pages) * 20;
-//     callback();
-//   };
-// };
+const updatePagination = (totalResults) => {
+  totalPages.innerHTML = `${Math.ceil(totalResults/20)}`
+  currentPageDiv.innerHTML = `${currentPage}`
+};
 
 // const updatePagination = () => {
 //   if (offset === 0) {
@@ -442,15 +469,12 @@ btnSearch.addEventListener("click", () => {
 //   }
 // };
 
-// btnSearch.addEventListener("click", () => {
-//   search();
-// });
 
 const inicio = () => {
   search();
   // showLoader();
-  // updatePaginationCallback(search);
   getApiUrl();
+ updatePaginationFuntion(search)
 };
 
 window.onload = inicio;
