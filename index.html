@@ -192,9 +192,9 @@
       <div class="container d-flex flex-column justify-content-center">
   
       <div  class="resultados-info">
-        <h4 class="fw-bold">Resultados</h4>
+        <h4 class="fw-bold" id="results-title">Resultados</h4>
         <div id="results-counter" class="fs-6 text-secondary fw-bold">
-          <p class="results-count"> <span class="results-number">0</span> RESULTADOS</p>
+          <p class="results-count"><span class="results-number">0</span> RESULTADOS</p>
         </div>
         <div id= "card-group" class="cards"></div>
 
@@ -215,14 +215,16 @@
                   PAGINADOR
     ********************************************* -->
 
-     
-
+    <div class="container-paginador">
+      <p>Pagina Actual: <span id="current-page">1</span></p> 
+      <p>Total de paginas: <span id="total-pages"></span></p>
+    </div>
 
         <div class="pagination">
-          <button  id="first" type="button" class="first-page pagination-button" aria-label="Página previa" disabled="">
+          <button  id="first" type="button" class="first-page pagination-button" aria-label="Página previa">
             <i class="fas fa-angle-double-left" aria-hidden="true"></i>
           </button>
-          <button id="previous" type="button" class="previous-page pagination-button" aria-label="Página Anterior" disabled="">
+          <button id="previous" type="button" class="previous-page pagination-button" aria-label="Página Anterior">
             <i class="fas fa-angle-left" aria-hidden="true"></i>
           </button>
           <button id="next" type="button" class="next-page pagination-button" aria-label="Siguiente ´Página">
