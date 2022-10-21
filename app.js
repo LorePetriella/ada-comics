@@ -27,6 +27,7 @@ const btnSearch = document.querySelector("#btn-search");
 //SECTION RESULTS ELEMENTS
 const resultsCounter = document.getElementById("results-counter");
 const resultsNumber = document.querySelector(".results-number");
+const resultsTitle = document.getElementById("results-title")
 const cardGroup = document.getElementById("card-group");
 // const charactersCards = document.getElementById("character-group");
 
@@ -171,9 +172,10 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
   return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
 
-const updateResultsCounter = (count) => {
+const updateResultsCounter = (count,title) => {
   resultsNumber.innerHTML = count;
   resultsCount = count;
+  resultsTitle.innerHTML = title
   updatePagination(resultsCount)
 };
 
@@ -191,7 +193,7 @@ const fetchComics = async () => {
   showLoader();
 
   printComics(results);
-  updateResultsCounter(total);
+  updateResultsCounter(total,'Resultados');
   hideLoader();
 };
 
@@ -261,7 +263,7 @@ const fetchComicCharacters = async (comicId) => {
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("comics", comicId, "characters"));
-  updateResultsCounter(total);
+  updateResultsCounter(total, "Personajes");
   //updatePagination(total)
   printCharacters(results);
   hideLoader();
@@ -300,7 +302,7 @@ const fetchCharacters = async () => {
   console.log(results);
   
   printCharacters(results);
-  updateResultsCounter(total);
+  updateResultsCounter(total, "Resultados");
   hideLoader();
 };
 
@@ -373,7 +375,7 @@ const fetchCharacterComics = async (characterId) => {
   } = await fetchUrl(getApiUrl("characters", characterId, "comics"));
   printComics(results);
   console.log(results);
-  updateResultsCounter(total);
+  updateResultsCounter(total, "Comics");
   // updatePagination(total)
 };
 
