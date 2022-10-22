@@ -23,7 +23,7 @@
       sizes="16x16"
       href="assets/icons/favicon-16x16.png"
     />
-    <link rel="stylesheet" type="text/css" href="loading.css"/>
+    <link rel="stylesheet" type="text/css" href="loading.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <title>ADAComics</title>
   </head>
@@ -67,7 +67,6 @@
     ********************************************* -->
     <main class="main">
       <div class="container d-flex flex-column justify-content-center">
-   
         <!-- ******************************************
                   MENÚ DE NAVEGACIÓN
       ********************************************* -->
@@ -96,7 +95,9 @@
             </div>
             <div class="col-12 col-lg-6">
               <div class="row d-flex flex-row justify-content-start">
-                <div class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center margen-derecho">
+                <div
+                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center margen-derecho"
+                >
                   <label
                     for="select-tipo"
                     class="fw-bold text-secondary margen-derecho"
@@ -110,7 +111,10 @@
                     <option value="characters">PERSONAJES</option>
                   </select>
                 </div>
-                <div id="div-select-comics" class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center">
+                <div
+                  id="div-select-comics"
+                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center"
+                >
                   <label
                     for="select-order-comics"
                     class="fw-bold text-secondary margen-derecho"
@@ -126,7 +130,10 @@
                     <option value="onsaleDate">Más viejos</option>
                   </select>
                 </div>
-                <div id="div-select-character" class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center d-none">
+                <div
+                  id="div-select-character"
+                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center d-none"
+                >
                   <label
                     for="select-order-characters"
                     class="fw-bold text-secondary margen-derecho"
@@ -141,10 +148,13 @@
                   </select>
                 </div>
                 <div
-                  class="col-12 col-sm-1 col-lg-1  d-flex flex-row align-items-center box-btn-buscar"
+                  class="col-12 col-sm-1 col-lg-1 d-flex flex-row align-items-center box-btn-buscar"
                 >
-
-                  <button id="btn-search" type="button" class="btn btn-dark rounded-1 box-btn-buscar">
+                  <button
+                    id="btn-search"
+                    type="button"
+                    class="btn btn-dark rounded-1 box-btn-buscar"
+                  >
                     BUSCAR
                   </button>
                 </div>
@@ -152,94 +162,110 @@
             </div>
           </div>
         </nav>
-      
-  
-    <!-- ******************************************
+
+        <!-- ******************************************
                   SECCIÓN COMICS
     ********************************************* -->
 
-    <section id="section-comics" class="d-none container d-flex  justify-content-center">
+        <section
+          id="section-comics"
+          class="d-none container d-flex justify-content-center"
+        >
+          <img src="" alt="" class="comic-cover" />
 
+          <div class="info-comic">
+            <h4 class="fw-bold comic-title"></h4>
+            <h5 class="fw-bold">Publicado:</h5>
+            <p class="comic-release-date"></p>
+            <h5 class="fw-bold">Guionistas:</h5>
+            <p class="comic-writers"></p>
+            <h5 class="fw-bold">Descripción:</h5>
+            <p class="comic-description"></p>
+          </div>
+        </section>
 
-        <img src="" alt="" class="comic-cover" >
-      
-      <div class="info-comic">
-        <h4 class="fw-bold comic-title"></h4>
-        <h5 class="fw-bold ">Publicado:</h5>
-        <p class="comic-release-date"></p>
-        <h5 class="fw-bold ">Guionistas:</h5>
-        <p class="comic-writers"></p>
-        <h5 class="fw-bold ">Descripción:</h5>
-        <p class="comic-description"></p>
-    </div>
-
-    </section>
-
-    <!-- ******************************************
+        <!-- ******************************************
                   SECCIÓN PERSONAJES
     ********************************************* -->
-      <section id="section-personajes" class="d-none">
-        <img class="retrato-personaje character-img" src="http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg" alt="">
-        <div class="info-personaje">
-          <h4 class="fw-bold character-name">Spider-Man (Peter Parker)</h4>
-          <p class="character-description">Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.</p>
-        </div>
-      </section>
-<!-- ******************************************
+        <section id="section-personajes" class="d-none">
+          <img class="retrato-personaje character-img" src="" alt="" />
+          <div class="info-personaje">
+            <h4 class="fw-bold character-name"></h4>
+            <p class="character-description"></p>
+          </div>
+        </section>
+        <!-- ******************************************
                   SECCIÓN RESULTADOS
     ********************************************* -->
-    <section>
-      <div class="container d-flex flex-column justify-content-center">
-  
-      <div  class="resultados-info">
-        <h4 class="fw-bold" id="results-title">Resultados</h4>
-        <div id="results-counter" class="fs-6 text-secondary fw-bold">
-          <p class="results-count"><span class="results-number">0</span> RESULTADOS</p>
-        </div>
-        <div id= "card-group" class="cards"></div>
+        <section>
+          <div class="container d-flex flex-column justify-content-center">
+            <div class="resultados-info">
+              <h4 class="fw-bold" id="results-title">Resultados</h4>
+              <div id="results-counter" class="fs-6 text-secondary fw-bold">
+                <p class="results-count">
+                  <span class="results-number">0</span> RESULTADOS
+                </p>
+              </div>
+              <div id="card-group" class="cards"></div>
+            </div>
+          </div>
+        </section>
 
-      
-
-      </div>
-    </div>
-  </section>
-  
-    <!-- ******************************************
+        <!-- ******************************************
                      LOADER
     ********************************************* -->
-    <div class="loader-container" >
-     <!-- style="background-image: url(./assets/img/bgmarvel.jpg);"> -->
-      <img src="./assets/icons/Hammer.png" class="ld ld-flip-h thor " alt="">
- </div>
-    <!-- ******************************************
+        <div class="loader-container">
+          <img
+            src="./assets/icons/Hammer.png"
+            class="ld ld-flip-h thor"
+            alt=""
+          />
+        </div>
+        <!-- ******************************************
                   PAGINADOR
     ********************************************* -->
 
-    <div class="container-paginador">
-      <p>Pagina Actual: <span id="current-page">1</span></p> 
-      <p>Total de paginas: <span id="total-pages"></span></p>
-    </div>
+        <div class="container-paginador">
+          <p>Pagina Actual: <span id="current-page">1</span></p>
+          <p>Total de paginas: <span id="total-pages"></span></p>
+        </div>
 
         <div class="pagination">
-          <button  id="first" type="button" class="first-page pagination-button" aria-label="Página previa">
+          <button
+            id="first"
+            type="button"
+            class="first-page pagination-button"
+            aria-label="Página previa"
+            disabled=""
+          >
             <i class="fas fa-angle-double-left" aria-hidden="true"></i>
           </button>
-          <button id="previous" type="button" class="previous-page pagination-button" aria-label="Página Anterior">
+          <button
+            id="previous"
+            type="button"
+            class="previous-page pagination-button"
+            aria-label="Página Anterior"
+            disabled=""
+          >
             <i class="fas fa-angle-left" aria-hidden="true"></i>
           </button>
-          <button id="next" type="button" class="next-page pagination-button" aria-label="Siguiente ´Página">
+          <button
+            id="next"
+            type="button"
+            class="next-page pagination-button"
+            aria-label="Siguiente Página"
+          >
             <i class="fas fa-angle-right" aria-hidden="true"></i>
           </button>
-          <button id="last" type="button" class="last-page pagination-button" aria-label="Última página">
+          <button
+            id="last"
+            type="button"
+            class="last-page pagination-button"
+            aria-label="Última página"
+          >
             <i class="fas fa-angle-double-right" aria-hidden="true"></i>
           </button>
         </div>
-
-
-
-
-
-
       </div>
     </main>
 
@@ -249,7 +275,7 @@
     <footer id="footer" class="page-footer footer-bg">
       <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
-          <div class="container d-flex justify-content-evenly ">
+          <div class="container d-flex justify-content-evenly">
             <span class="text-light"> © 2022 Copyright</span>
             <a
               class="text-lighten-4 right text-light"
@@ -281,53 +307,19 @@
       </div>
       <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span class="text-light"> © </span>
           </button>
-         
         </div>
       </nav>
-      <!-- <nav class="navbar  navbar-expand{-sm|-md|-lg|-xl|-xxl } bg-dark">
-        <div class="container-fluid">
-          <div class="container">
-            <a
-              class="grey-text text-lighten-4 right"
-              href="https://github.com/LorePetriella"
-              target="_blank"
-              data-message="Enlace a GitHub"
-            >
-              <i
-                class="fa-brands fa-github fa-2xl line-height-icon"
-                aria-hidden="true"
-              ></i>
-              Lore Petriella
-            </a>
-
-            <a
-              class="grey-text text-lighten-4 right"
-              href="https://github.com/StefaniaDiazV"
-              target="_blank"
-              data-message="Enlace a GitHub"
-            >
-              <i
-                class="fa-brands fa-github fa-2xl line-height-icon"
-                aria-hidden="true"
-              ></i>
-              Stefanía Diaz
-            </a>
-          </div>
-        </div> -->
-      </nav>
-      <!-- <div class="row">
-        <div class="footer-copyright copyright">
-         
-        </div>
-        <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">
-            © 2022 Copyright Stefanía Diaz y Lore Petriella
-          </h5>
-        </div>
-      </div> -->
     </footer>
 
     <script
