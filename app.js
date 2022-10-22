@@ -23,6 +23,7 @@ const selectOrderCharacters = document.getElementById(
 const selectType = document.getElementById("select-tipo");
 const inputSearch = document.getElementById("input-search");
 const btnSearch = document.querySelector("#btn-search");
+console.log(btnSearch);
 
 //SECTION RESULTS ELEMENTS
 const resultsCounter = document.getElementById("results-counter");
@@ -149,6 +150,7 @@ const getSearchParams = (isSearch) => {
 //Función que arma la URL------------------------------------------------------------------
 const getApiUrl = (resourse, resourseId, subResourse) => {
   const isSearch = !resourseId && !subResourse;
+
   let url = `${baseUrl}${resourse}`;
   // console.log(url); //http://gateway.marvel.com/v1/public/comics Hasta acá tengo esta parte de la URL
 
@@ -166,8 +168,10 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
 
   url += getSearchParams(isSearch);
 
-  return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
+  return url; //Retorna API completa: https://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
+
+console.log(getApiUrl());
 
 const updateResultsCounter = (count) => {
   resultsNumber.innerHTML = count;
@@ -190,6 +194,7 @@ const fetchComics = async () => {
   printComics(results);
   updateResultsCounter(total);
   hideLoader();
+  updatePagination();
 };
 
 //Función para pintar los comics en las cards
@@ -211,7 +216,7 @@ const printComics = (comics) => {
       clearResults();
       //hideCards();
       fetchComicCharacters(comic.id);
-      // updatePaginationCallback(() => fetchComicCharacters(comic.id));
+      updatePaginationCallback(() => fetchComicCharacters(comic.id));
     };
     comicCard.innerHTML = `
     <div class="comic-img-container">
@@ -261,6 +266,7 @@ const fetchComicCharacters = async (comicId) => {
   //updatePagination(total)
   printCharacters(results);
   hideLoader();
+  updatePagination();
 };
 
 const updateComicDetails = (img, title, releaseDate, writers, description) => {
@@ -293,11 +299,11 @@ const fetchCharacters = async () => {
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("characters"));
-  console.log(results);
 
   printCharacters(results);
   updateResultsCounter(total);
   hideLoader();
+  updatePagination();
 };
 
 const printCharacters = (characters) => {
@@ -313,11 +319,12 @@ const printCharacters = (characters) => {
     characterCard.classList.add("comic");
     characterCard.onclick = () => {
       // resetOffset();
+
       fetchCharacter(character.id);
       showCharacterDetails();
       clearResults();
       fetchCharacterComics(character.id);
-      // updatePaginationCallback(() => fetchComicCharacters(comic.id));
+      updatePaginationCallback(() => fetchCharacterComics(character.id));
     };
     characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
   <div class="card card-personaje">
@@ -363,15 +370,17 @@ const fetchCharacterComics = async (characterId) => {
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("characters", characterId, "comics"));
-  printComics(results);
-  console.log(results);
-  updateResultsCounter(total);
-  // updatePagination(total)
-};
 
+  printComics(results);
+
+  updateResultsCounter(total);
+  updatePagination();
+};
 const search = () => {
   if (selectType.value == "comics") {
     fetchComics();
+  } else {
+    fetchCharacters();
   }
 };
 
@@ -390,57 +399,66 @@ btnSearch.addEventListener("click", () => {
     hideComicDetail();
     hideCharacterDetails();
     clearResults();
-    fetchCharacters();
+    search();
+    // fetchCharacters();
     showCards();
   }
 });
 
 //PAGINATOR
 
-// const updatePaginationCallback = (callback) => {
-//   firstPage.onclick = () => {
-//     offset = 0;
-//     callback();
-//   };
-
-//   previousPage.onclick = () => {
-//     offset -= 20;
-//     if (offset < 0) {
-//       offset = 0;
-//     }
-//     callback();
-//   };
-
-//   nextPage.onclick = () => {
-//     offset += 20;
-//     callback();
-//   };
-
-//   lastPage.onclick = () => {
-//     const isExact = resultsCount % 20 === 0;
-//     const pages = Math.floor(resultsCount / 20);
-//     offset = (isExact ? pages - 1 : pages) * 20;
-//     callback();
-//   };
+// const resetOffset = () => {
+//   offSet = 0;
 // };
 
-// const updatePagination = () => {
-//   if (offset === 0) {
-//     firstPage.disabled = true;
-//     previousPage.disabled = true;
-//   } else {
-//     firstPage.disabled = false;
-//     previousPage.disabled = false;
-//   }
+const updatePaginationCallback = (callback) => {
+  firstPage.onclick = () => {
+    offSet = 0;
+    callback();
+    clearResults();
+  };
 
-//   if (offset + 20 >= resultsCount) {
-//     lastPage.disabled = true;
-//     nextPage.disabled = true;
-//   } else {
-//     lastPage.disabled = false;
-//     nextPage.disabled = false;
-//   }
-// };
+  previousPage.onclick = () => {
+    offSet -= 20;
+    callback();
+    clearResults();
+    if (offSet < 0) {
+      offSet = 0;
+    }
+  };
+
+  nextPage.onclick = () => {
+    offSet += 20;
+    callback();
+    clearResults();
+  };
+
+  lastPage.onclick = () => {
+    const isExact = resultsCount % 20 === 0;
+    const pages = Math.floor(resultsCount / 20);
+    offSet = (isExact ? pages - 1 : pages) * 20;
+    callback();
+    clearResults();
+  };
+};
+
+const updatePagination = () => {
+  if (offSet === 0) {
+    firstPage.disabled = true;
+    previousPage.disabled = true;
+  } else {
+    firstPage.disabled = false;
+    previousPage.disabled = false;
+  }
+
+  if (offSet + 20 >= resultsCount) {
+    lastPage.disabled = true;
+    nextPage.disabled = true;
+  } else {
+    lastPage.disabled = false;
+    nextPage.disabled = false;
+  }
+};
 
 // btnSearch.addEventListener("click", () => {
 //   search();
@@ -449,8 +467,12 @@ btnSearch.addEventListener("click", () => {
 const inicio = () => {
   search();
   // showLoader();
-  // updatePaginationCallback(search);
+  updatePaginationCallback(search);
   getApiUrl();
+  btnSearch.onclick = () => {
+    search();
+    updatePaginationCallback(search);
+  };
 };
 
 window.onload = inicio;
