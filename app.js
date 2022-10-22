@@ -27,7 +27,7 @@ const btnSearch = document.querySelector("#btn-search");
 //SECTION RESULTS ELEMENTS
 const resultsCounter = document.getElementById("results-counter");
 const resultsNumber = document.querySelector(".results-number");
-const resultsTitle = document.getElementById("results-title")
+const resultsTitle = document.getElementById("results-title");
 const cardGroup = document.getElementById("card-group");
 // const charactersCards = document.getElementById("character-group");
 
@@ -37,7 +37,7 @@ const previousPage = document.getElementById("previous");
 const lastPage = document.getElementById("last");
 const nextPage = document.getElementById("next");
 const currentPageDiv = document.getElementById("current-page");
-const totalPages = document.getElementById('total-pages');
+const totalPages = document.getElementById("total-pages");
 
 //elementos comic section
 
@@ -172,11 +172,11 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
   return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
 };
 
-const updateResultsCounter = (count,title) => {
+const updateResultsCounter = (count, title) => {
   resultsNumber.innerHTML = count;
   resultsCount = count;
-  resultsTitle.innerHTML = title
-  updatePagination(resultsCount)
+  resultsTitle.innerHTML = title;
+  updatePaginationData(resultsCount);
 };
 
 const fetchUrl = async (url) => {
@@ -193,14 +193,15 @@ const fetchComics = async () => {
   showLoader();
 
   printComics(results);
-  updateResultsCounter(total,'Resultados');
+  updateResultsCounter(total, "Resultados");
   hideLoader();
+  updatePagination();
 };
 
 //Función para pintar los comics en las cards
 const printComics = (comics) => {
-  clearResults()
-  if (comics.lenght === 0) {
+  clearResults();
+  if (comics.length === 0) {
     comicCard.innerHTML =
       '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
   }
@@ -211,13 +212,12 @@ const printComics = (comics) => {
     comicCard.classList.add("comic");
     comicCard.setAttribute("id", "comics-result");
     comicCard.onclick = () => {
-      // resetOffset();
       fetchComic(comic.id);
       showComicDetail();
       clearResults();
-      //hideCards();
+      clearPageCount();
       fetchComicCharacters(comic.id);
-      // updatePaginationCallback(() => fetchComicCharacters(comic.id));
+      updatePaginationCallback(() => fetchComicCharacters(comic.id));
     };
     comicCard.innerHTML = `
     <div class="comic-img-container">
@@ -256,6 +256,7 @@ const fetchComic = async (comicId) => {
   showComicDetail();
   hideCharacterDetails();
   hideLoader();
+  updatePagination();
 };
 
 const fetchComicCharacters = async (comicId) => {
@@ -264,9 +265,10 @@ const fetchComicCharacters = async (comicId) => {
     data: { results, total },
   } = await fetchUrl(getApiUrl("comics", comicId, "characters"));
   updateResultsCounter(total, "Personajes");
-  //updatePagination(total)
+
   printCharacters(results);
   hideLoader();
+  updatePagination();
 };
 
 const updateComicDetails = (img, title, releaseDate, writers, description) => {
@@ -300,14 +302,15 @@ const fetchCharacters = async () => {
     data: { results, total },
   } = await fetchUrl(getApiUrl("characters"));
   console.log(results);
-  
+
   printCharacters(results);
   updateResultsCounter(total, "Resultados");
   hideLoader();
+  updatePagination();
 };
 
 const printCharacters = (characters) => {
-  clearResults()
+  clearResults();
   if (characters.lenght === 0) {
     characterCard.innerHTML =
       '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
@@ -319,15 +322,12 @@ const printCharacters = (characters) => {
 
     characterCard.classList.add("comic");
     characterCard.onclick = () => {
-      // resetOffset();
       fetchCharacter(character.id);
       showCharacterDetails();
       clearResults();
+      clearPageCount();
       fetchCharacterComics(character.id);
-      // updatePaginationFuntion(fetchCharacterComics.bind(null,character.id)
-      //   // function() {
-      //   // fetchCharacterComics(character.id)}
-      //   )
+      updatePaginationCallback(() => fetchCharacterComics(character.id));
     };
     characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
   <div class="card card-personaje">
@@ -353,6 +353,7 @@ const fetchCharacter = async (characterId) => {
   characterDetails(character.name, coverPath, character.description);
   hideComicDetail();
   hideLoader();
+  updatePagination();
 };
 
 const characterDetails = (name, image, description) => {
@@ -374,16 +375,16 @@ const fetchCharacterComics = async (characterId) => {
     data: { results, total },
   } = await fetchUrl(getApiUrl("characters", characterId, "comics"));
   printComics(results);
-  console.log(results);
+
   updateResultsCounter(total, "Comics");
-  // updatePagination(total)
+  updatePagination();
 };
 
 const search = () => {
   if (selectType.value == "comics") {
     fetchComics();
   }
-  if(selectType.value === 'characters'){
+  if (selectType.value === "characters") {
     fetchCharacters();
   }
 };
@@ -397,86 +398,84 @@ const clearPageCount = () => {
   offSet = 0;
 };
 
-let currentPage = 1
-
+let currentPage = 1;
 
 btnSearch.addEventListener("click", () => {
-    hideComicDetail();
-    hideCharacterDetails();
-    clearResults();
-    clearPageCount();
-    search();
-    showCards();
+  hideComicDetail();
+  hideCharacterDetails();
+  clearResults();
+  clearPageCount();
+  search();
+  showCards();
+  updatePaginationCallback(search);
 });
 
 //PAGINATOR
 
+const updatePaginationCallback = (callback) => {
+  firstPage.onclick = () => {
+    offSet = 0;
+    currentPage = 1;
+    callback();
+    clearResults();
+  };
 
-const updatePaginationFuntion = (funcion) => {
-  firstPage.addEventListener('click', ()=> {
-  offSet = 0
-  currentPage = 1
-  funcion()
-  console.log('hola')
-  })
-  nextPage.addEventListener('click', (e)=> {
-    e.preventDefault();
-    offSet += 20
-    currentPage += 1
-    funcion()
-    console.log('hola')
-  })
-  previousPage.addEventListener('click', ()=> {
-    offSet -= 20
-    currentPage -= 1
-    funcion()
-    console.log('hola')
-  })
-  lastPage.addEventListener('click', ()=> {
-    let totalPages = Math.floor(resultsCount/20)
-    let totalRestResults = (resultsCount% 20);
-    let OtroPages = Math.ceil(resultsCount/20)
-    let otroTotal =  totalPages * 20
-    console.log(totalPages)
-    console.log(totalRestResults)
-    console.log(otroTotal)
-    offSet = otroTotal
-    currentPage = OtroPages
-    funcion()
-    console.log('hola')
-    //total = ceil()
-  })
+  previousPage.onclick = () => {
+    offSet -= 20;
+    currentPage -= 1;
+    callback();
+    clearResults();
+    if (offSet < 0) {
+      offSet = 0;
+    }
+  };
+
+  nextPage.onclick = () => {
+    offSet += 20;
+    currentPage += 1;
+    callback();
+    clearResults();
+  };
+
+  lastPage.onclick = () => {
+    const isExact = resultsCount % 20 === 0;
+    const pages = Math.floor(resultsCount / 20);
+    offSet = (isExact ? pages - 1 : pages) * 20;
+    let totalPages = Math.ceil(resultsCount / 20);
+    currentPage = totalPages;
+    callback();
+    clearResults();
+  };
 };
 
-const updatePagination = (totalResults) => {
-  totalPages.innerHTML = `${Math.ceil(totalResults/20)}`
-  currentPageDiv.innerHTML = `${currentPage}`
+const updatePaginationData = (totalResults) => {
+  totalPages.innerHTML = `${Math.ceil(totalResults / 20)}`;
+  currentPageDiv.innerHTML = `${currentPage}`;
 };
 
-// const updatePagination = () => {
-//   if (offset === 0) {
-//     firstPage.disabled = true;
-//     previousPage.disabled = true;
-//   } else {
-//     firstPage.disabled = false;
-//     previousPage.disabled = false;
-//   }
+const updatePagination = () => {
+  if (offSet === 0) {
+    firstPage.disabled = true;
+    previousPage.disabled = true;
+  } else {
+    firstPage.disabled = false;
+    previousPage.disabled = false;
+  }
 
-//   if (offset + 20 >= resultsCount) {
-//     lastPage.disabled = true;
-//     nextPage.disabled = true;
-//   } else {
-//     lastPage.disabled = false;
-//     nextPage.disabled = false;
-//   }
-// };
-
+  if (offSet + 20 >= resultsCount) {
+    lastPage.disabled = true;
+    nextPage.disabled = true;
+  } else {
+    lastPage.disabled = false;
+    nextPage.disabled = false;
+  }
+};
 
 const inicio = () => {
   search();
-  // showLoader();
+  updatePaginationCallback(search);
   getApiUrl();
- updatePaginationFuntion(search)
+  updatePagination();
 };
 
 window.onload = inicio;
