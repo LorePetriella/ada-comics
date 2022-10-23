@@ -272,42 +272,84 @@
     <!-- ******************************************
                        FOOTER
     ********************************************* -->
+
     <footer id="footer" class="page-footer footer-bg">
       <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
-          <div class="container d-flex justify-content-evenly">
-            <span class="text-light"> © 2022 Copyright</span>
-            <a
-              class="text-lighten-4 right text-light"
-              href="https://github.com/LorePetriella"
-              target="_blank"
-              data-message="Enlace a GitHub"
-            >
-              <i
-                class="fa-brands fa-github fa-2xl line-height-icon text-light"
-                aria-hidden="true"
-              ></i>
-              Lore Petriella
-            </a>
+          <div class="container">
+            <div class="row d-flex justify-content-between">
+              <div class="col-12">
+                <section
+                  id="contact-lore"
+                  class="d-flex justify-content-evenly"
+                >
+                  <a
+                    class="text-lighten-4 right text-light"
+                    href="https://github.com/LorePetriella"
+                    target="_blank"
+                    data-message="Enlace a GitHub"
+                  >
+                    <i
+                      id="lore-github"
+                      class="fa-brands fa-github fa-2xl line-height-icon text-light"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
 
-            <a
-              class="text-lighten-4 right text-light"
-              href="https://github.com/StefaniaDiazV"
-              target="_blank"
-              data-message="Enlace a GitHub"
-            >
-              <i
-                class="fa-brands fa-github fa-2xl line-height-icon text-light"
-                aria-hidden="true"
-              ></i>
-              Stefanía Diaz
-            </a>
+                  <a
+                    class="text-lighten-4 right text-light"
+                    href="https://www.linkedin.com/in/lorepetriella/"
+                    target="_blank"
+                    data-message="Enlace a Linkedin"
+                  >
+                    <i
+                      id="lore-linkedin"
+                      class="fa-brands fa-linkedin fa-2xl line-height-icon text-light"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                </section>
+              </div>
+              <div class="col-12">
+                <section
+                  id="contact-stefa"
+                  class="d-flex justify-content-evenly"
+                >
+                  <a
+                    class="text-lighten-4 right text-light"
+                    href="https://github.com/StefaniaDiazV"
+                    target="_blank"
+                    data-message="Enlace a GitHub"
+                  >
+                    <i
+                      id="stefa-github"
+                      class="fa-brands fa-github fa-2xl line-height-icon text-light"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+
+                  <a
+                    class="text-lighten-4 right text-light"
+                    href=""
+                    target="_blank"
+                    data-message="Enlace a Linkedin"
+                  >
+                    <i
+                      id="stefa-linkedin"
+                      class="fa-brands fa-linkedin fa-2xl line-height-icon text-light"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                </section>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
+        <div class="container-fluid justify-content-evenly">
           <button
+            id="lore"
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -316,12 +358,24 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="text-light"> © </span>
+            <span class="text-light">Lore Petriella</span>
+          </button>
+          <span class="text-light">© 2022 Copyright</span>
+          <button
+            id="stefa"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="text-light">Stefanía Diaz</span>
           </button>
         </div>
       </nav>
     </footer>
-
     <script
       src="https://kit.fontawesome.com/4943010bed.js"
       crossorigin="anonymous"
