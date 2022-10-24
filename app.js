@@ -3,14 +3,13 @@ const element = document.getElementById("animate");
 const init = document.getElementById("enter-btn"); //btn enter
 const presentation = document.getElementById("presentation-container");
 
-//SECTIONS
+//MAIN SECTIONS
 const header = document.querySelector(".header");
 const main = document.querySelector("main");
 const footer = document.getElementById("footer");
 const body = document.getElementById("body");
 const comicSection = document.getElementById("section-comics");
 const comicsGroup = document.getElementById("comics-result");
-
 const characterSection = document.getElementById("section-personajes");
 
 //SEARCH NAV
@@ -52,8 +51,18 @@ const comicDescription = document.querySelector(".comic-description");
 const characterImg = document.querySelector(".character-img");
 const characterName = document.querySelector(".character-name");
 const characterDescription = document.querySelector(".character-description");
-
 const loaderContainer = document.querySelector(".loader-container");
+
+//FOOTER ELEMENTS
+
+const btnLore = document.getElementById("lore");
+const btnStefa = document.getElementById("stefa");
+const contactLore = document.getElementById("contact-lore");
+const contactStefa = document.getElementById("contact-stefa");
+const loreGithub = document.getElementById("lore-github");
+const loreLinkedin = document.getElementById("lore-linkedin");
+const stefaGithub = document.getElementById("stefa-github");
+const stefaLinkedin = document.getElementById("stefa-linkedin");
 
 // Animación logo
 
@@ -102,6 +111,31 @@ selectType.addEventListener("click", (e) => {
     divCharacterSelect.classList.remove("d-none");
     divComicSelect.classList.add("d-none");
   }
+});
+
+//VISTAS FOOTER
+
+// const btnLore = document.getElementById("lore");
+// const btnStefa = document.getElementById("stefa");
+// const contactLore = document.getElementById("lore-contact");
+// const contactStefa = document.getElementById("lore-stefa-contact");
+
+btnLore.addEventListener("click", () => {
+  contactLore.classList.remove("d-none");
+  contactStefa.classList.add("d-none");
+  loreGithub.classList.add("text-danger");
+  loreGithub.classList.remove("text-light");
+  loreLinkedin.classList.add("text-danger");
+  loreLinkedin.classList.remove("text-light");
+});
+
+btnStefa.addEventListener("click", () => {
+  contactLore.classList.add("d-none");
+  contactStefa.classList.remove("d-none");
+  stefaGithub.classList.add("text-danger");
+  stefaGithub.classList.remove("text-light");
+  stefaLinkedin.classList.add("text-danger");
+  stefaLinkedin.classList.remove("text-light");
 });
 
 //LOADER
