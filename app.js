@@ -236,8 +236,8 @@ const fetchComics = async () => {
 const printComics = (comics) => {
   clearResults();
   if (comics.length === 0) {
-    comicCard.innerHTML =
-      '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
+    cardGroup.innerHTML =
+      '<h2 class="no-lenght fw-bold fs-5">No hemos encontrado resultados</h2>';
   }
 
   for (const comic of comics) {
@@ -345,9 +345,9 @@ const fetchCharacters = async () => {
 
 const printCharacters = (characters) => {
   clearResults();
-  if (characters.lenght === 0) {
-    characterCard.innerHTML =
-      '<h2 class="no-lenght">No hemos encontrado resultados</h2>';
+  if (characters.length === 0) {
+    cardGroup.innerHTML =
+      '<h2 class="no-lenght fw-bold fs-5">No hemos encontrado resultados</h2>';
   }
 
   for (const character of characters) {
