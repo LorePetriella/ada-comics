@@ -135,7 +135,7 @@
   backface-visibility: hidden;
   scale: 1, 1;
   transform: translateZ(0);
-  background: #1b2030 url("/assets/img/mearvel-legacy-header.jpg") 50% -50% no-repeat;
+  background: #1b2030 url("../assets/img/mearvel-legacy-header.jpg") 50% -50% no-repeat;
   filter: grayscale(100%);
   background-size: cover;
   background-attachment: fixed;
