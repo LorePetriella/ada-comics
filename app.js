@@ -145,7 +145,7 @@ const showLoader = () => loaderContainer.classList.remove("d-none");
 
 const publicKey = "1a42c8351bfeecbe486fbaf76a0bdaaf";
 const privateKey = "28546d1565fb610d445047ee5409883b002faab6";
-const baseUrl = `https://gateway.marvel.com/v1/public/`;
+const baseUrl = `http://gateway.marvel.com/v1/public/`;
 // const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}`;
 let offSet = 0;
 let resultsCount = 0;
@@ -303,6 +303,7 @@ const fetchComicCharacters = async (comicId) => {
   printCharacters(results);
   hideLoader();
   updatePagination();
+  hideCharacterDetails();
 };
 
 const updateComicDetails = (img, title, releaseDate, writers, description) => {
@@ -484,7 +485,7 @@ const updatePaginationCallback = (callback) => {
 
 const updatePaginationData = (totalResults) => {
   totalPages.innerHTML = `${Math.ceil(totalResults / 20)}`;
-  currentPageDiv.innerHTML = `${currentPage}`;
+  currentPageDiv.innerHTML = `${totalResults === 0 ? 0 : currentPage}`;
 };
 
 const updatePagination = () => {
