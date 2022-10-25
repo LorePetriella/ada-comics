@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -167,10 +171,7 @@
                   SECCIÓN COMICS
     ********************************************* -->
 
-        <section
-          id="section-comics"
-          class="d-none"
-        >
+        <section id="section-comics" class="d-none">
           <img src="" alt="" class="comic-cover" />
 
           <div class="info-comic">
@@ -226,7 +227,10 @@
     ********************************************* -->
 
         <div class="container-paginador d-flex justify-content-center">
-          <p class="fw-bold">Página <span id="current-page"></span> de <span id="total-pages"></span></p>
+          <p class="fw-bold">
+            Página <span id="current-page"></span> de
+            <span id="total-pages"></span>
+          </p>
         </div>
 
         <div class="pagination">
