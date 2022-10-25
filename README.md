@@ -27,7 +27,6 @@ El presente proyecto consiste en una página web, la cual te permitirá realizar
   - Mostrar 20 resultados por página
   - Indicar la cantidad de páginas y la página actual
   - Deshabilitar los botones correspondientes cuando no puedan ser utilizados
-- Modo oscuro y modo claro
 
 ### Comics
 
