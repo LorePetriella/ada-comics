@@ -8,7 +8,7 @@ El presente proyecto consiste en una página web, la cual te permitirá realizar
 
 ## Deployado 🚀
 
-[Enlace al proyecto ada-comics ](https://github.com/LorePetriella/ada-comics)
+[Enlace al proyecto ada-comics ](https://lorepetriella.github.io/ada-comics/)
 
 ## Herramientas 🛠️
 
