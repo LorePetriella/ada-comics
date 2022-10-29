@@ -1,6 +1,6 @@
 //ANIMATION ELEMENTS
 const element = document.getElementById("animate");
-const init = document.getElementById("enter-btn"); //btn enter
+const init = document.getElementById("enter-btn"); 
 const presentation = document.getElementById("presentation-container");
 
 //MAIN SECTIONS
@@ -28,7 +28,6 @@ const resultsCounter = document.getElementById("results-counter");
 const resultsNumber = document.querySelector(".results-number");
 const resultsTitle = document.getElementById("results-title");
 const cardGroup = document.getElementById("card-group");
-// const charactersCards = document.getElementById("character-group");
 
 //PAGINATOR ELEMENTS
 const firstPage = document.getElementById("first");
@@ -38,8 +37,7 @@ const nextPage = document.getElementById("next");
 const currentPageDiv = document.getElementById("current-page");
 const totalPages = document.getElementById("total-pages");
 
-//elementos comic section
-
+// ELEMENTS COMIC SECTION
 const comicImg = document.querySelector(".comic-cover");
 const comicTitle = document.querySelector(".comic-title");
 const comicReleaseDate = document.querySelector(".comic-release-date");
@@ -115,11 +113,6 @@ selectType.addEventListener("click", (e) => {
 
 //VISTAS FOOTER
 
-// const btnLore = document.getElementById("lore");
-// const btnStefa = document.getElementById("stefa");
-// const contactLore = document.getElementById("lore-contact");
-// const contactStefa = document.getElementById("lore-stefa-contact");
-
 btnLore.addEventListener("click", () => {
   contactLore.classList.remove("d-none");
   contactStefa.classList.add("d-none");
@@ -146,7 +139,7 @@ const showLoader = () => loaderContainer.classList.remove("d-none");
 const publicKey = "1a42c8351bfeecbe486fbaf76a0bdaaf";
 const privateKey = "28546d1565fb610d445047ee5409883b002faab6";
 const baseUrl = `https://gateway.marvel.com/v1/public/`;
-// const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}`;
+
 let offSet = 0;
 let resultsCount = 0;
 
@@ -174,8 +167,7 @@ const OrderResults = (isSearch, resourse) => {
 
 //Retorna última parte de la URL-------------------------------------------------------------
 const getSearchParams = (isSearch) => {
-  // let url = baseUrl;
-  let searchParamsId = `?apikey=${publicKey}&offset=${offSet}`; //Retorna esta parte de la URL
+  let searchParamsId = `?apikey=${publicKey}&offset=${offSet}`; 
   let searchParams = `&offset=${offSet}&apikey=${publicKey}`;
   if (!isSearch) {
     return searchParamsId;
@@ -187,7 +179,6 @@ const getSearchParams = (isSearch) => {
 const getApiUrl = (resourse, resourseId, subResourse) => {
   const isSearch = !resourseId && !subResourse;
   let url = `${baseUrl}${resourse}`;
-  // console.log(url); //http://gateway.marvel.com/v1/public/comics Hasta acá tengo esta parte de la URL
 
   if (resourseId) {
     url += `/${resourseId}`;
@@ -203,7 +194,7 @@ const getApiUrl = (resourse, resourseId, subResourse) => {
 
   url += getSearchParams(isSearch);
 
-  return url; //Retorna API completa: http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&offset=${offset}
+  return url; 
 };
 
 const updateResultsCounter = (count, title) => {
@@ -238,7 +229,7 @@ const printComics = (comics) => {
   if (comics.length === 0) {
     cardGroup.innerHTML =
       '<h2 class="no-lenght fw-bold fs-5">No hemos encontrado resultados</h2>';
-  }
+  };
 
   for (const comic of comics) {
     const comicCard = document.createElement("div");
@@ -329,6 +320,7 @@ const hideCards = () => {
 const showCards = () => {
   cardGroup.classList.remove("d-none");
 };
+
 // CHARACTERS
 
 const fetchCharacters = async () => {
@@ -336,7 +328,6 @@ const fetchCharacters = async () => {
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("characters"));
-  console.log(results);
 
   printCharacters(results);
   updateResultsCounter(total, "Resultados");
@@ -462,7 +453,7 @@ const updatePaginationCallback = (callback) => {
     clearResults();
     if (offSet < 0) {
       offSet = 0;
-    }
+    };
   };
 
   nextPage.onclick = () => {
